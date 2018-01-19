@@ -8,23 +8,26 @@ export const searchEngineCode = new Array(
  '.f1 facebook.com/search/top/?q= Facebook',
  '.33 youtubeinmp3.com/it/download/?video= YouTubeInMP3',
  '.ic iconfinder.com/search/?q= Iconfinder',
+ '.un unsplash.com/search?keyword= Unsplash',
+ '.pi pinterest.com/search/pins/?q= Pinterest',
+ '.si sinonimi-contrari.it/ Sinonimi',
+ '.ss guardaserie.online/?s= Guardaserie',
+ '.st stackoverflow.com/search?q= StackOverflow'
+ '.md developer.mozilla.org/it/search?q= MDN'
+ '.cp codepen.io/search/pens?q= Codepen'
+ '.in www.instagram.com/explore/tags/ Instagram_Tags'
+ '.np www.npmjs.com/search?q= npm'
  'it-en translate.google.com/#it/en/ IT->EN',
  'en-it translate.google.com/#en/it/ EN->IT',
  'it-fr translate.google.com/#it/fr/ IT->FR',
  'fr-it translate.google.com/#fr/it/ FR->IT',
  'it-es translate.google.com/#it/es IT->ES',
  'es-it translate.google.com/#es/it ES->IT',
- '.un unsplash.com/search?keyword= Unsplash',
- '.pi pinterest.com/search/pins/?q= Pinterest',
- '.si sinonimi-contrari.it/ Sinonimi',
- '.ss guardaserie.online/?s= Guardaserie',
- '.st stackoverflow.com/search?q= StackOverflow'
 );
 
 export const shortcutCode = new Array(
  'F facebook.com Facebook',
  'Y youtube.com Youtube',
- 'M play.google.com/music/listen Google_Play_Music',
  'N instagram.com Instagram',
  'W web.whatsapp.com WhatsApp_Web',
  'G gmail.com Gmail',
@@ -36,5 +39,8 @@ export const shortcutCode = new Array(
  'P paypal.com Paypal',
  'L dribbble.com Dribbble',
  'U tumblr.com Tumblr',
- '2 pinterest.com Pinterest'
+ '2 pinterest.com Pinterest',
+ 'C codepen.io Codepen'
+ 'S stackoverflow.com StackOverflow'
+ 'M medium.com Medium'
 );
