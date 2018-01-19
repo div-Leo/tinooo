@@ -29,7 +29,6 @@ class App extends Component {
  };
 
  grabEvent = e => {
-  console.log(e.which);
   switch (e.which) {
    case 18:
     this.openHelp();
