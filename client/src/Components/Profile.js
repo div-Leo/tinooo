@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import empty_profile from '../images/profile_icon.png'
+import GoogleLogin from 'react-google-login';
+import GoogleIcon from 'react-icons/lib/fa/google';
 import './Profile.css';
 
 class Profile extends Component {
@@ -11,7 +13,6 @@ class Profile extends Component {
 
  // Facebook
  responseFb = response => {
-   console.log(response);
   fetch('http://localhost:3001/auth/facebook', {
    method: 'POST',
    body: JSON.stringify(response),
@@ -26,7 +27,23 @@ class Profile extends Component {
    });
  };
 
+ responseGoogle = response => {
+  fetch('http://localhost:3001/auth/google', {
+   method: 'POST',
+   body: JSON.stringify(response),
+   headers: new Headers({
+    'Content-Type': 'application/json'
+   })
+  })
+   .then(res => res.json())
+   .then(data => {
+    localStorage.setItem('accessToken', data.accessToken);
+    this.login();
+   });
+ };
+
  login = async () => {
+   console.log('//////////////////////////');
    if (localStorage.getItem('accessToken')) {
     fetch('http://localhost:3001/login', {
      headers: {
@@ -65,8 +82,8 @@ class Profile extends Component {
     {/* onClick={() => this.logout()}  */}
     <div className="profile_login">
      <div className="profile_login_text">Login with:</div>
-     <FacebookLogin
-       cssClass="profile_login_button"
+     {/* <FacebookLogin
+       cssClass="profile_login_button profile_login_button--facebook"
       appId="180949189168618"
       autoLoad={true}
       fields="name, email, picture"
@@ -74,7 +91,16 @@ class Profile extends Component {
       callback={this.responseFb}
       textButton=""
       icon="fa-facebook"
-     />
+     /> */}
+
+     <GoogleLogin
+        clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
+        buttonText="G+"
+        className="profile_login_button profile_login_button--google"
+        scope="profile email"
+        onSuccess={this.responseGoogle}
+        onFailure={this.responseGoogle}
+      ></GoogleLogin>
     </div>
    </div>
   );
