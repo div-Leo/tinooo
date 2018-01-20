@@ -39,10 +39,15 @@ class SideBar extends Component {
   });
  };
 
- addNewSc = () => {
+ show() {
+  console.log('show');
   this.setState({ showModal: true });
-  console.log(this.state.showModal);
- };
+ }
+
+ close() {
+  console.log('close');
+  this.setState({ showModal: false });
+ }
 
  // RENDER =========
 
@@ -78,7 +83,7 @@ class SideBar extends Component {
         </div>
        );
       })}
-      <div className="side_li_item" onClick={() => this.addNewSc()}>
+      <div className="side_li_item" onClick={() => this.show()}>
        <h3 className="side_li_add">Add new</h3>
        <h3 className="side_li_add">+</h3>
       </div>
@@ -152,8 +157,9 @@ class SideBar extends Component {
      </div>
     </div>
     <ModalAdd
-     open={this.state.showModal}
-     onOpen={() => console.log('hi, open!')}
+     show={this.state.showModal}
+     open={this.show.bind(this)}
+     close={this.close.bind(this)}
     />
    </div>
   ) : null;
