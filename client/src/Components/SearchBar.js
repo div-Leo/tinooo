@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import { searchEngineCode } from '../data/shortcutData';
+import './SearchBar.css'
 
 class SearchBar extends Component {
  actionSearch = (text, link, name) => {
@@ -52,6 +52,7 @@ class SearchBar extends Component {
     <input
      onKeyUp={e => this.searchWithBrain(e)}
      id="search-bar"
+     className="searchbar"
      placeholder="Something"
      type="Text"
     />

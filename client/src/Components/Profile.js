@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import TiSocialFacebook from 'react-icons/lib/ti/social-facebook';
 import empty_profile from '../images/profile_icon.png'
 import './Profile.css';
 
@@ -54,21 +53,18 @@ class Profile extends Component {
  renderProfile = open => {
   return this.state.logged === true ? (
    <div className="profile_container">
-    <div className="profile_img_div">
      <img className="profile_img" src={this.state.user.profile_picture} />
-    </div>
-    <div className="profile_name">{this.state.user.name}</div>
-    <div className="profile_email">{this.state.user.email}</div>
+     <div className="profile_login profile_login--logged">
+      <div className="profile_name">{this.state.user.name}</div>
+      <div className="profile_email">{this.state.user.email}</div>
+     </div>
    </div>
   ) : (
    <div className="profile_container">
-    <img
-      onClick={() => this.logout()}
-     className="profile_img"
-     src={empty_profile}
-    />
-    <div className="profile_login_div">
-     {/* <div className="profile_login_text">Login with:</div> */}
+    <img className="profile_img" src={empty_profile}/>
+    {/* onClick={() => this.logout()}  */}
+    <div className="profile_login">
+     <div className="profile_login_text">Login with:</div>
      <FacebookLogin
        cssClass="profile_login_button"
       appId="180949189168618"
@@ -76,6 +72,8 @@ class Profile extends Component {
       fields="name, email, picture"
       scope="public_profile,user_friends,user_actions.books,email"
       callback={this.responseFb}
+      textButton=""
+      icon="fa-facebook"
      />
     </div>
    </div>
