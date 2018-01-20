@@ -1,5 +1,6 @@
 const nconf = require('../configuration.js');
 const config = require('../config.js');
+const axios = require('axios');
 const monk = require('monk');
 const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
 
@@ -25,13 +26,11 @@ const userDB = async (userData) => {
 module.exports.authFacebook = async (ctx, next) => {
   if ('POST' != ctx.method) return await next();
   let facebookUserData = {'name': ctx.request.body.name, 'email': ctx.request.body.email, 'facebook_id': ctx.request.body.id, 'accessToken': ctx.request.body.accessToken, 'profile_picture': ctx.request.body.picture.data.url};
-  console.log('authFacebook', facebookUserData.id);
   let authResult = await axios.get(config.facebook.validateUrl, {
     headers: {
       'Authorization': 'Bearer ' + facebookUserData.accessToken,
     }
   });
-  console.log('authResult', authResult.data);
   if (authResult.data.id == facebookUserData.facebook_id) {
     await userDB(facebookUserData);
     ctx.status = 200;

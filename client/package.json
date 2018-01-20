@@ -9,6 +9,7 @@
   "react": "^16.2.0",
   "react-dom": "^16.2.0",
   "react-facebook-login": "^3.7.2",
+  "react-icons": "^2.2.7",
   "react-scripts": "1.1.0",
   "semantic-ui-react": "^0.77.2"
  },

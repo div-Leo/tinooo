@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-
+import TiSocialFacebook from 'react-icons/lib/ti/social-facebook';
+import empty_profile from '../images/profile_icon.png'
 import './Profile.css';
 
 class Profile extends Component {
  constructor(props) {
   super(props);
-  this.state = {
-   loggedIn: true
-  };
+  this.state = {};
  }
 
  // Facebook
  responseFb = response => {
-  fetch('https://localhost:3001/auth/facebook', {
+   console.log(response);
+  fetch('http://localhost:3001/auth/facebook', {
    method: 'POST',
    body: JSON.stringify(response),
    headers: new Headers({
@@ -22,50 +22,59 @@ class Profile extends Component {
   })
    .then(res => res.json())
    .then(data => {
-    localStorage.setItem('userSearches', data.searches);
-    localStorage.setItem('userShortcuts', data.shortcuts);
     localStorage.setItem('accessToken', data.accessToken);
     this.login();
    });
  };
 
  login = async () => {
-  fetch('https://localhost:3001/login', {
-   headers: {
-    Authorization: 'Bearer ' + localStorage.getItem('accessToken')
-   }
-  })
-   .then(res => res.json())
-   .then(data =>
-    this.setState({
-     user: data
+   if (localStorage.getItem('accessToken')) {
+    fetch('http://localhost:3001/login', {
+     headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+     }
     })
-   );
+     .then(res => res.json())
+     .then(data => {
+        this.setState({
+          user: data,
+          logged: true
+        })
+        localStorage.setItem('userSearches', data.searches);
+        localStorage.setItem('userShortcuts', data.shortcuts);
+      }
+     );
+   }
  };
 
+ logout  = () => {
+  localStorage.removeItem('accessToken');
+}
+
  renderProfile = open => {
-  return open === true ? (
+  return this.state.logged === true ? (
    <div className="profile_container">
     <div className="profile_img_div">
-     <img className="profile_img" src="https://i.imgur.com/ycmx6tt.jpg" />
+     <img className="profile_img" src={this.state.user.profile_picture} />
     </div>
-    <div className="profile_name">Arol Vinolas</div>
-    <div className="profile_email">arolvinolas@codeworks.me</div>
+    <div className="profile_name">{this.state.user.name}</div>
+    <div className="profile_email">{this.state.user.email}</div>
    </div>
   ) : (
    <div className="profile_container">
     <img
+      onClick={() => this.logout()}
      className="profile_img"
-     src="http://www.combonetwork.com/img/empty_profile.png"
+     src={empty_profile}
     />
-
     <div className="profile_login_div">
-     <div className="profile_login_text">Login with:</div>
+     {/* <div className="profile_login_text">Login with:</div> */}
      <FacebookLogin
+       cssClass="profile_login_button"
       appId="180949189168618"
       autoLoad={true}
-      fields="name,email,picture"
-      scope="public_profile,user_friends,user_actions.books"
+      fields="name, email, picture"
+      scope="public_profile,user_friends,user_actions.books,email"
       callback={this.responseFb}
      />
     </div>
@@ -75,7 +84,7 @@ class Profile extends Component {
 
  // RENDER =========================
  render() {
-  return <div> {this.renderProfile(this.state.loggedIn)}</div>;
+  return <div> {this.renderProfile(this.state.logged)}</div>;
  }
 }
 

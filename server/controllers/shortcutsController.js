@@ -2,11 +2,13 @@ const monk = require('monk');
 const nconf = require('../configuration.js');
 const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
 
-const User = db.get('users');
+const Sc = db.get('shortcuts');
 
 
 module.exports.getShortcuts = async (ctx) =>{
-
+  // const res = await Sc.find();
+  // ctx.response.body =  res.sort(function (a, b){return  b.score - a.score});
+  // ctx.status=200;
 };
 
 module.exports.postShortcuts = async (ctx) =>{
