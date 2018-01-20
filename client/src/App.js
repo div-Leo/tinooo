@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { searchEngineCode, shortcutCode } from './data/shortcutData';
+import { shortcutCode } from './data/shortcutData';
 
 import './App.css';
 
@@ -14,7 +14,7 @@ const secretKey = 'ctrl';
 class App extends Component {
  constructor(props) {
   super(props);
-  this.state = { toggleSide: false };
+  this.state = { toggleSide: true };
  }
 
  componentDidMount() {
@@ -30,19 +30,11 @@ class App extends Component {
 
  socialBtn = () => {
   for (let i = 0; i < shortcutCode.length; i++) {
-   console.log('hi');
    this.addShortcut(
     shortcutCode[i].split(' ')[0],
     shortcutCode[i].split(' ')[1]
    );
   }
-  // this.shortcut.add(secretKey + '+1', function() {
-  //  var t =
-  //   $('input')
-  //    .val()
-  //    .toLowerCase() + '&btnI';
-  //  actionSearch('', 'google.com/search?q=' + t, 'Google Lucky');
-  // });
  };
 
  inputFocus = () => {

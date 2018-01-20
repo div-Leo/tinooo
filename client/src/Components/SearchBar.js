@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { searchEngineCode, shortcutCode } from '../data/shortcutData';
+import { searchEngineCode } from '../data/shortcutData';
 
 class SearchBar extends Component {
  actionSearch = (text, link, name) => {

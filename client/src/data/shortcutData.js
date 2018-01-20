@@ -22,7 +22,9 @@ export const searchEngineCode = new Array(
  'it-fr translate.google.com/#it/fr/ IT->FR',
  'fr-it translate.google.com/#fr/it/ FR->IT',
  'it-es translate.google.com/#it/es IT->ES',
- 'es-it translate.google.com/#es/it ES->IT'
+ 'es-it translate.google.com/#es/it ES->IT',
+ 'it-de translate.google.com/#it/de IT->DE',
+ 'de-it translate.google.com/#de/it DE->IT'
 );
 
 export const shortcutCode = new Array(
