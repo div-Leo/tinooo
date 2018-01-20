@@ -39,6 +39,11 @@ module.exports.authFacebook = async (ctx, next) => {
   } else ctx.status = 404;
 };
 
+module.exports.authGoogle = async (ctx, next) => {
+  if ('POST' != ctx.method) return await next();
+  ctx.status = 404;
+};
+
 module.exports.login = async (ctx, next) => {
   if ('GET' != ctx.method) return await next();
   console.log('login', ctx.user);

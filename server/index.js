@@ -5,6 +5,11 @@ const router = require('./router.js');
 const Koa = require('koa');
 const app = new Koa();
 
+const monk = require('monk');
+const nconf = require('./configuration.js');
+const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
+const User = db.get('users');
+
 app.use(cors())
   .use(bodyparser())
   .use(async (ctx, next) => {
@@ -15,4 +20,4 @@ app.use(cors())
     return await next();
   })
   .use(router.routes())
-  .listen(3000);
+  .listen(3001);
