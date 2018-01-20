@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import empty_profile from '../images/profile_icon.png'
+import empty_profile from '../images/profile_icon.png';
 import './Profile.css';
 
 class Profile extends Component {
@@ -11,7 +11,7 @@ class Profile extends Component {
 
  // Facebook
  responseFb = response => {
-   console.log(response);
+  console.log(response);
   fetch('http://localhost:3001/auth/facebook', {
    method: 'POST',
    body: JSON.stringify(response),
@@ -27,46 +27,45 @@ class Profile extends Component {
  };
 
  login = async () => {
-   if (localStorage.getItem('accessToken')) {
-    fetch('http://localhost:3001/login', {
-     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
-     }
-    })
-     .then(res => res.json())
-     .then(data => {
-        this.setState({
-          user: data,
-          logged: true
-        })
-        localStorage.setItem('userSearches', data.searches);
-        localStorage.setItem('userShortcuts', data.shortcuts);
-      }
-     );
-   }
+  if (localStorage.getItem('accessToken')) {
+   fetch('http://localhost:3001/login', {
+    headers: {
+     Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+    }
+   })
+    .then(res => res.json())
+    .then(data => {
+     this.setState({
+      user: data,
+      logged: true
+     });
+     localStorage.setItem('userSearches', data.searches);
+     localStorage.setItem('userShortcuts', data.shortcuts);
+    });
+  }
  };
 
- logout  = () => {
+ logout = () => {
   localStorage.removeItem('accessToken');
-}
+ };
 
  renderProfile = open => {
   return this.state.logged === true ? (
    <div className="profile_container">
-     <img className="profile_img" src={this.state.user.profile_picture} />
-     <div className="profile_login profile_login--logged">
-      <div className="profile_name">{this.state.user.name}</div>
-      <div className="profile_email">{this.state.user.email}</div>
-     </div>
+    <img className="profile_img" src={this.state.user.profile_picture} />
+    <div className="profile_login profile_login--logged">
+     <div className="profile_name">{this.state.user.name}</div>
+     <div className="profile_email">{this.state.user.email}</div>
+    </div>
    </div>
   ) : (
    <div className="profile_container">
-    <img className="profile_img" src={empty_profile}/>
+    <img className="profile_img" src={empty_profile} />
     {/* onClick={() => this.logout()}  */}
     <div className="profile_login">
      <div className="profile_login_text">Login with:</div>
      <FacebookLogin
-       cssClass="profile_login_button"
+      cssClass="profile_login_button"
       appId="180949189168618"
       autoLoad={true}
       fields="name, email, picture"

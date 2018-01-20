@@ -65,7 +65,7 @@ class App extends Component {
   return (
    <div
     className="App"
-    onClick={this.inputFocus}
+    // onClick={this.inputFocus}
     onKeyDown={e => this.grabEvent(e)}
    >
     <SideBar shown={this.state.toggleSide} />
