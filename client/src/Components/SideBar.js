@@ -25,7 +25,7 @@ class SideBar extends Component {
   let num;
   list
    ? (num = this.heightOfLi(list))
-   : id === 'about' ? (num = 262) : (num = 240);
+   : num=280;
   const target = document.querySelector(`#${id}`);
   if (this.state[id]) {
    animations.dropUp(target);
