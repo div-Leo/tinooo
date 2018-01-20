@@ -5,7 +5,6 @@ const ModalAdd = () => (
  <Modal>
   <Modal.Header>Select a Photo</Modal.Header>
   <Modal.Content image>
-   <Image wrapped size="medium" src="/assets/images/avatar/large/rachel.png" />
    <Modal.Description>
     <Header>Default Profile Image</Header>
     <p>

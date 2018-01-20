@@ -7,13 +7,40 @@ class Profile extends Component {
  constructor(props) {
   super(props);
   this.state = {
-   loggedIn: false
+   loggedIn: true
   };
  }
 
  // Facebook
  responseFb = response => {
-  console.log(response);
+  fetch('https://localhost:3001/auth/facebook', {
+   method: 'POST',
+   body: JSON.stringify(response),
+   headers: new Headers({
+    'Content-Type': 'application/json'
+   })
+  })
+   .then(res => res.json())
+   .then(data => {
+    localStorage.setItem('userSearches', data.searches);
+    localStorage.setItem('userShortcuts', data.shortcuts);
+    localStorage.setItem('accessToken', data.accessToken);
+    this.login();
+   });
+ };
+
+ login = async () => {
+  fetch('https://localhost:3001/login', {
+   headers: {
+    Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+   }
+  })
+   .then(res => res.json())
+   .then(data =>
+    this.setState({
+     user: data
+    })
+   );
  };
 
  renderProfile = open => {
