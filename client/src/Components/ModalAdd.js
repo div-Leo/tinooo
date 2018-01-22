@@ -20,7 +20,7 @@ class ModalAdd extends Component {
   await this.setState({
    [e.target.id]: e.target.value
   });
-  console.log(this.state);
+
   if (
    keyEnter === 13 &&
    this.state.name !== '' &&
@@ -32,20 +32,34 @@ class ModalAdd extends Component {
     let splitItem = el.split(' ');
     splitItem[0].toLowerCase() !== this.state.shortcut.toLowerCase()
      ? // send db
-       false
+       this.sendShortcutDB(
+        `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
+       )
      : this.denyEntry();
    });
   }
  };
 
  denyEntry = () => {
-  console.log('reaching deny?');
   // TODO: function to shake modal and request new shortcut
   const element = document.querySelector('#modal');
   animations.shakeModal(element);
   this.setState({
    deny: 'Shortcut taken - Please try another'
   });
+ };
+
+ sendShortcutDB = str => {
+  fetch('https://localhost:3001', {
+   headers: {
+    method: 'POST',
+    body: str,
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+   }
+  })
+   .then(res => res.json())
+   .then(data => console.log(data));
+  // .then(data => localStorage.setItem('userShortcuts', data));
  };
 
  closeModal = f => {
