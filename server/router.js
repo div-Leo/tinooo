@@ -1,7 +1,8 @@
 const Router = require('koa-router');
 const router = new Router();
 const userCtrl = require('./controllers/userController');
-const scCtrl = require('./controllers/shortcutsController');
+const shortcutCtrl = require('./controllers/shortcutsController');
+const searchesCtrl = require('./controllers/searchesController');
 
 const authorize = async (ctx, next) => {
   if (!ctx.user) {
@@ -13,12 +14,13 @@ const authorize = async (ctx, next) => {
 
 router.get('/login', authorize, userCtrl.login)
   .post('/auth/facebook', userCtrl.authFacebook)
-  .get('/logout', userCtrl.logout)
   .post('/auth/google', userCtrl.authGoogle)
 
-  .get('/shortcuts', scCtrl.getShortcuts)
-  .post('/shortcuts', scCtrl.postShortcuts)
-  .delete('/shortcuts', scCtrl.deleteShortcuts)
-  .put('/shortcuts', scCtrl.editShortcuts)
+  .post('/shortcuts', shortcutCtrl.postShortcuts)
+  .put('/shortcuts', shortcutCtrl.editShortcuts)
+  .put('/shortcuts', shortcutCtrl.resetShortcuts)
+
+  .post('/shortcuts', searchesCtrl.postSearchesHistory)
+  .delete('/shortcuts', searchesCtrl.resetSearchesHistory)
 
 module.exports = router;
