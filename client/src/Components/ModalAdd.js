@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal, { closeStyle } from 'simple-react-modal';
+import animations from '../animations';
 
 import './ModalAdd.css';
 
@@ -9,7 +10,8 @@ class ModalAdd extends Component {
   this.state = {
    name: '',
    shortcut: '',
-   url_link: ''
+   url_link: '',
+   deny: ''
   };
  }
 
@@ -18,16 +20,17 @@ class ModalAdd extends Component {
   await this.setState({
    [e.target.id]: e.target.value
   });
+  console.log(this.state);
   if (
    keyEnter === 13 &&
    this.state.name !== '' &&
    this.state.url_link !== '' &&
    this.state.shortcut !== ''
   ) {
-   let shortcutData = localStorage.getItem('userShortcuts');
-   shortcutData.split(',').forEach(el => {
+   let shortcutData = localStorage.getItem('userShortcuts').split(',');
+   shortcutData.forEach(el => {
     let splitItem = el.split(' ');
-    splitItem[0] !== this.state.shortcut
+    splitItem[0].toLowerCase() !== this.state.shortcut.toLowerCase()
      ? // send db
        false
      : this.denyEntry();
@@ -36,7 +39,13 @@ class ModalAdd extends Component {
  };
 
  denyEntry = () => {
+  console.log('reaching deny?');
   // TODO: function to shake modal and request new shortcut
+  const element = document.querySelector('#modal');
+  animations.shakeModal(element);
+  this.setState({
+   deny: 'Shortcut taken - Please try another'
+  });
  };
 
  closeModal = f => {
@@ -52,6 +61,7 @@ class ModalAdd extends Component {
   return (
    <div className="modal_window">
     <Modal
+     id="full_modal"
      closeOnOuterClick={true}
      onClose={() => this.closeModal(this.props.close)}
      style={{}}
@@ -79,6 +89,7 @@ class ModalAdd extends Component {
         id="shortcut"
         className="modal_input modal_input--ctrl"
        />
+       <span className="modal_deny_text">{this.state.deny}</span>
       </div>
      </div>
     </Modal>
