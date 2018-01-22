@@ -44,6 +44,14 @@ class Profile extends Component {
    });
  };
 
+ updateLocalStorage = data => {
+  let localData = JSON.parse(localStorage.getItem('userShortcuts'))
+   .split(',')
+   .push(data)
+   .join(',');
+  localStorage.setItem('userShortcuts', JSON.stringify(localData));
+ };
+
  login = async () => {
   if (localStorage.getItem('accessToken')) {
    fetch('http://localhost:3001/login', {
@@ -57,27 +65,8 @@ class Profile extends Component {
       user: data,
       logged: true
      });
-     localStorage.setItem('userSearches', data.searches);
-     if (data.shortcuts) localStorage.setItem('userShortcuts', data.shortcuts);
-     else localStorage.setItem('userShortcuts', shortcutCode);
-     // this.getShortcuts()
-    });
-  }
- };
-
- postShortcuts = shortcut => {
-  if (localStorage.getItem('accessToken')) {
-   fetch('http://localhost:3001/shortcuts', {
-    headers: {
-     method: 'POST',
-     body: shortcut,
-     Authorization: 'Bearer ' + localStorage.getItem('accessToken')
-    }
-   })
-    .then(res => res.json())
-    .then(data => {
-     localStorage.setItem('userSearches', data.searches);
-     localStorage.setItem('userShortcuts', data.shortcuts);
+     // localStorage.setItem('userSearches', data.searches);
+     if (data.shortcuts) this.updateLocalStorage(data.shortcuts);
     });
   }
  };
