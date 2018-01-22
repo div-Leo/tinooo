@@ -20,8 +20,11 @@ class SideBar extends Component {
 
  getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
 
- heightOfLi = (id, list) =>
-  id == 'shortcuts' ? list.length * 46 + 79 + 46 : list.length * 46 + 79;
+ heightOfLi = (id, list) => {
+  return id === 'shortcuts' && this.state.loggedIn
+   ? list.length * 46 + 79 + 46
+   : list.length * 46 + 79;
+ };
 
  openLi = async (e, id, list) => {
   let num;
@@ -50,12 +53,31 @@ class SideBar extends Component {
   this.setState({ showModal: false });
  }
 
+ loggedIn(bool) {
+  this.setState({ loggedIn: bool });
+ }
+
+ setUserData(data) {
+  this.setState({ userData: data });
+ }
+
+ logout() {
+  this.setState({ userData: undefined, loggedIn: false });
+  this.props.toggle();
+  this.props.focusSearch();
+ }
+
  // RENDER =========
 
  render() {
   return this.props.shown ? (
    <div className="side_container">
-    <Profile />
+    <Profile
+     logged={bool => this.loggedIn(bool)}
+     setUserData={data => this.setUserData(data)}
+     userData={this.state.userData}
+     logout={bool => this.logout(bool)}
+    />
     <h1 className="side_title">Tinooo's Settings</h1>
     <p className="side_text">
      Tinooo is a multiple search engine developed for a smarter and faster
@@ -84,10 +106,12 @@ class SideBar extends Component {
         </div>
        );
       })}
-      <div className="side_li_item" onClick={() => this.show()}>
-       <h3 className="side_li_add">Add new</h3>
-       <h3 className="side_li_add">+</h3>
-      </div>
+      {this.state.loggedIn ? (
+       <div className="side_li_item" onClick={() => this.show()}>
+        <h3 className="side_li_add">Add new</h3>
+        <h3 className="side_li_add">+</h3>
+       </div>
+      ) : null}
      </div>
     </div>
 
