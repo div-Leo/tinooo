@@ -15,6 +15,7 @@ class App extends Component {
  constructor(props) {
   super(props);
   this.state = { toggleSide: true };
+  this.checkLocalStorage();
  }
 
  componentDidMount() {
@@ -22,17 +23,26 @@ class App extends Component {
   this.socialBtn();
  }
 
+ checkLocalStorage = () => {
+  localStorage.getItem('userShortcuts')
+   ? false
+   : localStorage.setItem('userShortcuts', shortcutCode);
+ };
+
  addShortcut = (a, b) => {
   shortcut.add(secretKey + '+' + a, function() {
    window.open('http://' + b, '');
   });
  };
 
+ getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
+
  socialBtn = () => {
-  for (let i = 0; i < shortcutCode.length; i++) {
+  let shortcutData = this.getShortcuts();
+  for (let i = 0; i < shortcutData.length; i++) {
    this.addShortcut(
-    shortcutCode[i].split(' ')[0],
-    shortcutCode[i].split(' ')[1]
+    shortcutData[i].split(' ')[0],
+    shortcutData[i].split(' ')[1]
    );
   }
  };
