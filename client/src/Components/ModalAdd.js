@@ -13,7 +13,7 @@ class ModalAdd extends Component {
   };
  }
 
- enterKey = async e => {
+ keypressData = async e => {
   await this.setState({
    [e.target.id]: e.target.value
   });
@@ -24,7 +24,15 @@ class ModalAdd extends Component {
    this.state.url_link !== '' &&
    this.state.shortcut !== ''
   ) {
-   // send db
+   let shortcutData = localStorage.getItem('userShortcuts');
+   console.log(shortcutData);
+   shortcutData.forEach(el => {
+    let splitItem = el.split(' ');
+    splitItem[0] !== this.state.shortcut
+     ? // send db
+       false
+     : false;
+   });
   }
  };
 
@@ -47,7 +55,7 @@ class ModalAdd extends Component {
      containerStyle={{ width: '40vw', padding: '30px 40px' }}
      show={this.props.show}
     >
-     <div id="modal" onKeyUp={e => this.enterKey(e)} className="modal_item">
+     <div id="modal" onKeyUp={e => this.keypressData(e)} className="modal_item">
       <span className="modal_title">New Shortcut:</span>
       <span className="modal_text">
        Insert the url of the website you'd like to add and assign it to a
