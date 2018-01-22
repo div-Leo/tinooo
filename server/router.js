@@ -17,9 +17,9 @@ router
  .post('/auth/facebook', userCtrl.authFacebook)
  .post('/auth/google', userCtrl.authGoogle)
 
- .post('/shortcuts', shortcutCtrl.postShortcuts)
- .put('/shortcuts', shortcutCtrl.editShortcuts)
- .delete('/shortcuts', shortcutCtrl.resetShortcuts)
+ .post('/shortcuts', authorize, shortcutCtrl.postShortcuts)
+ .put('/shortcuts', authorize, shortcutCtrl.editShortcuts)
+ .delete('/shortcuts', authorize, shortcutCtrl.resetShortcuts)
 
  .post('/searches', searchesCtrl.postSearchesHistory)
  .delete('/searches', searchesCtrl.resetSearchesHistory);
