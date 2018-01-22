@@ -5,6 +5,8 @@ import GoogleLogin from 'react-google-login';
 import GoogleIcon from 'react-icons/lib/fa/google';
 import './Profile.css';
 
+import logout from '../assets/img/logout.png';
+
 import { shortcutCode } from '../data/shortcutData';
 
 class Profile extends Component {
@@ -54,17 +56,15 @@ class Profile extends Component {
 
  login = async () => {
   if (localStorage.getItem('accessToken')) {
-   fetch('http://localhost:3001/login', {
+   await this.props.logged(true);
+   await fetch('http://localhost:3001/login', {
     headers: {
      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
     }
    })
     .then(res => res.json())
     .then(data => {
-     this.setState({
-      user: data,
-      logged: true
-     });
+     this.props.setUserData(data);
      // localStorage.setItem('userSearches', data.searches);
      if (data.shortcuts) this.updateLocalStorage(data.shortcuts);
     });
@@ -74,21 +74,27 @@ class Profile extends Component {
  logout = () => {
   // TODO: clean localStorage
   localStorage.removeItem('accessToken');
+  localStorage.setItem('userShortcuts', shortcutCode);
+  this.props.logout();
  };
 
- renderProfile = open => {
-  return this.state.logged === true ? (
+ renderProfile = () => {
+  return this.props.userData ? (
    <div className="profile_container">
-    <img className="profile_img" src={this.state.user.profile_picture} />
-    <div className="profile_login profile_login--logged">
-     <div className="profile_name">{this.state.user.name}</div>
-     <div className="profile_email">{this.state.user.email}</div>
+    <img className="profile_img" src={this.props.userData.profile_picture} />
+    <div className="profile_login profile_login--loggedIn">
+     <div className="profile_name">{this.props.userData.name}</div>
+     <div className="profile_email">{this.props.userData.email}</div>
+
+     <div onClick={() => this.logout()} className="profile_logout">
+      <span>log out</span>
+      <img src={logout} />
+     </div>
     </div>
    </div>
   ) : (
    <div className="profile_container">
     <img className="profile_img" src={empty_profile} />
-    {/* onClick={() => this.logout()}  */}
     <div className="profile_login">
      <div className="profile_login_text">Login with:</div>
      <FacebookLogin
@@ -117,7 +123,7 @@ class Profile extends Component {
 
  // RENDER =========================
  render() {
-  return <div> {this.renderProfile(this.state.logged)}</div>;
+  return <div> {this.renderProfile()}</div>;
  }
 }
 

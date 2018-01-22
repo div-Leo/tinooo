@@ -58,10 +58,7 @@ class ModalAdd extends Component {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
    }
-  })
-   .then(res => res.json())
-   .then(data => this.concatShortcuts(str));
-  // .then(data => localStorage.setItem('userShortcuts', data));
+  }).then(data => this.concatShortcuts(str));
  };
 
  concatShortcuts = async str => {

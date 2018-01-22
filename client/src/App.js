@@ -78,7 +78,11 @@ class App extends Component {
     // onClick={this.inputFocus}
     onKeyDown={e => this.grabEvent(e)}
    >
-    <SideBar shown={this.state.toggleSide} />
+    <SideBar
+     shown={this.state.toggleSide}
+     toggle={() => this.openHelp()}
+     focusSearch={() => this.inputFocus()}
+    />
     <SearchBar />
    </div>
   );
