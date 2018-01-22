@@ -11,7 +11,8 @@ class ModalAdd extends Component {
    name: '',
    shortcut: '',
    url_link: '',
-   deny: ''
+   deny: '',
+   db_shortcuts: ''
   };
  }
 
@@ -28,15 +29,15 @@ class ModalAdd extends Component {
    this.state.shortcut !== ''
   ) {
    let shortcutData = localStorage.getItem('userShortcuts').split(',');
-   shortcutData.forEach(el => {
+   let taken = shortcutData.some(el => {
     let splitItem = el.split(' ');
-    splitItem[0].toLowerCase() !== this.state.shortcut.toLowerCase()
-     ? // send db
-       this.sendShortcutDB(
-        `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
-       )
-     : this.denyEntry();
+    return splitItem[0].toLowerCase() === this.state.shortcut.toLowerCase();
    });
+   !taken
+    ? this.sendShortcutDB(
+       `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
+      )
+    : this.denyEntry();
   }
  };
 
@@ -49,17 +50,26 @@ class ModalAdd extends Component {
   });
  };
 
- sendShortcutDB = str => {
-  fetch('https://localhost:3001', {
+ sendShortcutDB = async str => {
+  await fetch('http://localhost:3001/shortcuts', {
+   method: 'POST',
+   body: JSON.stringify({ shortcut: str }),
    headers: {
-    method: 'POST',
-    body: str,
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
    }
   })
    .then(res => res.json())
-   .then(data => console.log(data));
+   .then(data => this.concatShortcuts(str));
   // .then(data => localStorage.setItem('userShortcuts', data));
+ };
+
+ concatShortcuts = async str => {
+  let localShortcuts = await localStorage.getItem('userShortcuts');
+  let data = localShortcuts.split(',');
+  data.push(str);
+  let newData = data.join(',');
+  await localStorage.setItem('userShortcuts', newData);
  };
 
  closeModal = f => {
