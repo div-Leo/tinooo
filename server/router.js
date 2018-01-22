@@ -20,7 +20,7 @@ router.get('/login', authorize, userCtrl.login)
   .put('/shortcuts', shortcutCtrl.editShortcuts)
   .put('/shortcuts', shortcutCtrl.resetShortcuts)
 
-  .post('/shortcuts', searchesCtrl.postSearchesHistory)
-  .delete('/shortcuts', searchesCtrl.resetSearchesHistory)
+  .post('/searches', searchesCtrl.postSearchesHistory)
+  .delete('/searches', searchesCtrl.resetSearchesHistory)
 
 module.exports = router;
