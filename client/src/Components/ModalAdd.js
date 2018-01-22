@@ -28,15 +28,15 @@ class ModalAdd extends Component {
    this.state.shortcut !== ''
   ) {
    let shortcutData = localStorage.getItem('userShortcuts').split(',');
-   shortcutData.forEach(el => {
+   let taken = shortcutData.some(el => {
     let splitItem = el.split(' ');
-    splitItem[0].toLowerCase() !== this.state.shortcut.toLowerCase()
-     ? // send db
-       this.sendShortcutDB(
-        `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
-       )
-     : this.denyEntry();
+    return splitItem[0].toLowerCase() === this.state.shortcut.toLowerCase();
    });
+   !taken
+    ? this.sendShortcutDB(
+       `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
+      )
+    : this.denyEntry();
   }
  };
 
@@ -50,10 +50,12 @@ class ModalAdd extends Component {
  };
 
  sendShortcutDB = str => {
-  fetch('https://localhost:3001', {
+  console.log(localStorage.getItem('accessToken'));
+  fetch('http://localhost:3001/shortcuts', {
+   method: 'POST',
+   body: JSON.stringify({ shortcut: str }),
    headers: {
-    method: 'POST',
-    body: str,
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
    }
   })
