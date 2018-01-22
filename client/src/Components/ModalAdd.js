@@ -11,7 +11,8 @@ class ModalAdd extends Component {
    name: '',
    shortcut: '',
    url_link: '',
-   deny: ''
+   deny: '',
+   db_shortcuts: ''
   };
  }
 
@@ -49,9 +50,8 @@ class ModalAdd extends Component {
   });
  };
 
- sendShortcutDB = str => {
-  console.log(localStorage.getItem('accessToken'));
-  fetch('http://localhost:3001/shortcuts', {
+ sendShortcutDB = async str => {
+  await fetch('http://localhost:3001/shortcuts', {
    method: 'POST',
    body: JSON.stringify({ shortcut: str }),
    headers: {
@@ -60,8 +60,16 @@ class ModalAdd extends Component {
    }
   })
    .then(res => res.json())
-   .then(data => console.log(data));
+   .then(data => this.concatShortcuts(str));
   // .then(data => localStorage.setItem('userShortcuts', data));
+ };
+
+ concatShortcuts = async str => {
+  let localShortcuts = await localStorage.getItem('userShortcuts');
+  let data = localShortcuts.split(',');
+  data.push(str);
+  let newData = data.join(',');
+  await localStorage.setItem('userShortcuts', newData);
  };
 
  closeModal = f => {
