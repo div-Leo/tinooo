@@ -57,11 +57,30 @@ class Profile extends Component {
      });
      localStorage.setItem('userSearches', data.searches);
      localStorage.setItem('userShortcuts', data.shortcuts);
+     // this.getShortcuts()
     });
   }
  };
 
+ postShortcuts = (shortcut) =>{
+   if (localStorage.getItem('accessToken')) {
+    fetch('http://localhost:3001/shortcuts', {
+     headers: {
+      method: 'POST',
+      body: shortcut,
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+     }
+    })
+     .then(res => res.json())
+     .then(data => {
+      localStorage.setItem('userSearches', data.searches);
+      localStorage.setItem('userShortcuts', data.shortcuts);
+     });
+   }
+ }
+
  logout = () => {
+   // TODO: clean localStorage
   localStorage.removeItem('accessToken');
  };
 
