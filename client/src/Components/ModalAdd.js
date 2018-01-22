@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import Modal, { closeStyle } from 'simple-react-modal';
 
+import './ModalAdd.css';
+
 class ModalAdd extends Component {
  constructor(props) {
   super(props);
   this.state = {
+   name: '',
    shortcut: '',
    url_link: ''
   };
  }
 
- enterKey = e => {
-  this.setState({
+ enterKey = async e => {
+  await this.setState({
    [e.target.id]: e.target.value
   });
-  console.log(this.state);
+  await console.log(this.state);
   if (
    e.which === 13 &&
+   this.state.name !== '' &&
    this.state.url_link !== '' &&
    this.state.shortcut !== ''
   ) {
@@ -26,6 +30,7 @@ class ModalAdd extends Component {
 
  closeModal = f => {
   this.setState({
+   name: '',
    shortcut: '',
    url_link: ''
   });
@@ -42,93 +47,26 @@ class ModalAdd extends Component {
      containerStyle={{ width: '40vw', padding: '30px 40px' }}
      show={this.props.show}
     >
-     <div
-      onKeyUp={e => this.enterKey(e)}
-      style={{ display: 'flex', flexDirection: 'column' }}
-     >
-      <span
-       style={{
-        fontFamily: 'Avenir',
-        fontWeight: 800,
-        fontSize: '1.8em',
-        marginBottom: '10px'
-       }}
-      >
-       New Shortcut:
-      </span>
-      <span
-       style={{
-        color: '#aaa',
-        fontFamily: 'Avenir',
-        fontWeight: 300,
-        marginBottom: '10px',
-        fontSize: '1.1em'
-       }}
-      >
+     <div id="modal" onKeyUp={e => this.enterKey(e)} className="modal_item">
+      <span className="modal_title">New Shortcut:</span>
+      <span className="modal_text">
        Insert the url of the website you'd like to add and assign it to a
        letter.
       </span>
-      <div
-       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-      >
-       <h2
-        style={{
-         fontFamily: 'Avenir',
-         color: '#aaa',
-         fontWeight: '300',
-         marginRight: '10px'
-        }}
-       >
-        URL:
-       </h2>
-       <input
-        id="url_link"
-        style={{
-         marginLeft: '10px',
-         width: '600px',
-         height: '40px',
-         outlineColor: 'none',
-         border: 'none',
-         boxShadow: '0 0 5px 2px rgba(50,50,50,0.1)',
-         outlineOffset: 'none',
-         outline: 'none',
-         outlineColor: 'none',
-         fontSize: '1.2em',
-         paddingLeft: '15px'
-        }}
-       />
+      <div className="modal_subtitle_item">
+       <h2 className="modal_subtitle_text">Name:</h2>
+       <input id="name" className="modal_input" />
       </div>
-      <div
-       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-      >
-       <h2
-        style={{
-         fontFamily: 'Avenir',
-         color: '#aaa',
-         fontWeight: '300',
-         marginRight: '10px'
-        }}
-       >
-        CTRL +
-       </h2>
+      <div className="modal_subtitle_item">
+       <h2 className="modal_subtitle_text">URL:</h2>
+       <input id="url_link" className="modal_input" />
+      </div>
+      <div className="modal_subtitle_item">
+       <h2 className="modal_subtitle_text">CTRL +</h2>
        <input
         maxLength={1}
         id="shortcut"
-        style={{
-         paddingLeft: '20px',
-         marginLeft: '10px',
-         width: '40px',
-         height: '40px',
-         outlineColor: 'none',
-         border: 'none',
-         boxShadow: '0 0 5px 2px rgba(50,50,50,0.1)',
-         outlineOffset: 'none',
-         outline: 'none',
-         outlineColor: 'none',
-         fontSize: '1.2em',
-         textTransform: 'uppercase'
-        }}
-        className="modal_input_ctrl"
+        className="modal_input modal_input--ctrl"
        />
       </div>
      </div>
