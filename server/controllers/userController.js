@@ -8,7 +8,7 @@ var GoogleAuth = require('google-auth-library');
 const User = db.get('users');
 
 const userDB = async (userData) => {
-  let user = await User.findOne({social_id: userData.id});
+  let user = await User.findOne({email: userData.email});
   if (!user) {
     try {
       user = await User.insert(userData);
@@ -16,7 +16,7 @@ const userDB = async (userData) => {
     } catch (e) { console.error('User.insert', e); }
   } else {
     try {
-      await User.update({social_id: userData.id}, {'name': userData.name, 'email': userData.email, 'accessToken': userData.accessToken, 'profile_picture': userData.profile_picture});
+      await User.update({email: userData.email}, {'name': userData.name, 'social_id': userData.id , 'email': userData.email, 'accessToken': userData.accessToken, 'profile_picture': userData.profile_picture});
       user = await User.findOne({social_id: userData.id});
       return user.accessToken;
     } catch(e) { console.error('User.update', e); }
@@ -50,20 +50,12 @@ module.exports.authGoogle = async (ctx, next) => {
   if (authResult.data.sub == googleUserData.id) {
     await userDB(googleUserData);
     ctx.status = 200;
-    console.log(googleUserData.accessToken);
     ctx.body = JSON.stringify({'accessToken': googleUserData.accessToken});
   } else ctx.status = 404;
 };
 
 module.exports.login = async (ctx, next) => {
   if ('GET' != ctx.method) return await next();
-  console.log('login', ctx.user);
   ctx.body = ctx.user;
   ctx.status = 200;
 }
-
-// QUESTION: what do i have to do when logout
-module.exports.logout = async (ctx, next) => {
-  if ('GET' != ctx.method) return await next();
-  ctx.status = 201;
-};
