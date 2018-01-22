@@ -90,7 +90,7 @@ class Profile extends Component {
       textButton=""
       icon="fa-facebook"
      />
-
+     <div className="profile_login_text">or</div>
      <GoogleLogin
         clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
         buttonText="G+"

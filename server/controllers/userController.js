@@ -62,6 +62,7 @@ module.exports.login = async (ctx, next) => {
   ctx.status = 200;
 }
 
+// QUESTION: what do i have to do when logout
 module.exports.logout = async (ctx, next) => {
   if ('GET' != ctx.method) return await next();
   ctx.status = 201;
