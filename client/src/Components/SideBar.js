@@ -18,14 +18,15 @@ class SideBar extends Component {
   };
  }
 
- heightOfLi = list =>
-  list === shortcutCode ? list.length * 46 + 79 + 46 : list.length * 46 + 79;
+ getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
+
+ heightOfLi = (id, list) =>
+  id == 'shortcuts' ? list.length * 46 + 79 + 46 : list.length * 46 + 79;
 
  openLi = async (e, id, list) => {
   let num;
-  list
-   ? (num = this.heightOfLi(list))
-   : num=280;
+  console.log('LIST======', list);
+  list ? (num = this.heightOfLi(id, list)) : (num = 280);
   const target = document.querySelector(`#${id}`);
   if (this.state[id]) {
    animations.dropUp(target);
@@ -67,7 +68,7 @@ class SideBar extends Component {
       <h1 className="side_li_title">Shortcuts:</h1>
       <div
        className="side_li_arrow"
-       onClick={e => this.openLi(e, 'shortcuts', shortcutCode)}
+       onClick={e => this.openLi(e, 'shortcuts', this.getShortcuts())}
       />
      </div>
      <div>
@@ -75,7 +76,7 @@ class SideBar extends Component {
        Using one of the following key combinations, you will be directed
        immediately to the website indicated.
       </p>
-      {shortcutCode.map((item, i) => {
+      {this.getShortcuts().map((item, i) => {
        return (
         <div key={i} className="side_li_item">
          <h3>{item.split(' ')[2]}</h3>
