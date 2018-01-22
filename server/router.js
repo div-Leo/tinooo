@@ -19,7 +19,7 @@ router
 
  .post('/shortcuts', shortcutCtrl.postShortcuts)
  .put('/shortcuts', shortcutCtrl.editShortcuts)
- .put('/shortcuts', shortcutCtrl.resetShortcuts)
+ .delete('/shortcuts', shortcutCtrl.resetShortcuts)
 
  .post('/searches', searchesCtrl.postSearchesHistory)
  .delete('/searches', searchesCtrl.resetSearchesHistory);
