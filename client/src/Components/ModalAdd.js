@@ -14,26 +14,29 @@ class ModalAdd extends Component {
  }
 
  keypressData = async e => {
+  const keyEnter = e.which;
   await this.setState({
    [e.target.id]: e.target.value
   });
-  await console.log(this.state);
   if (
-   e.which === 13 &&
+   keyEnter === 13 &&
    this.state.name !== '' &&
    this.state.url_link !== '' &&
    this.state.shortcut !== ''
   ) {
    let shortcutData = localStorage.getItem('userShortcuts');
-   console.log(shortcutData);
-   shortcutData.forEach(el => {
+   shortcutData.split(',').forEach(el => {
     let splitItem = el.split(' ');
     splitItem[0] !== this.state.shortcut
      ? // send db
        false
-     : false;
+     : this.denyEntry();
    });
   }
+ };
+
+ denyEntry = () => {
+  // TODO: function to shake modal and request new shortcut
  };
 
  closeModal = f => {
