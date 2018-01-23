@@ -9,6 +9,8 @@ import { shortcut } from './data/sc.min';
 import SearchBar from './Components/SearchBar';
 import SideBar from './Components/SideBar';
 
+import animations from './animations';
+
 const secretKey = 'ctrl';
 
 class App extends Component {
@@ -24,6 +26,11 @@ class App extends Component {
  componentDidMount() {
   this.inputFocus();
   this.socialBtn();
+  const dot1 = document.querySelector('#dot_1');
+  const dot2 = document.querySelector('#dot_2');
+  const dot3 = document.querySelector('#dot_3');
+  const dots = [dot2, dot3, dot1];
+  animations.dotDrop(dots);
  }
 
  checkLocalStorage = () => {
@@ -63,6 +70,8 @@ class App extends Component {
   this.setState({
    toggleSide: !this.state.toggleSide
   });
+  // let element = document.querySelector('.side_container');
+  // animations.sideBarOpen(element);
  };
 
  grabEvent = e => {
@@ -90,11 +99,17 @@ class App extends Component {
     onKeyDown={e => this.grabEvent(e)}
    >
     <SideBar
+     id="sidebar_container"
      changeFocus={this.changeFocusMode}
      shown={this.state.toggleSide}
-     toggle={() => this.openHelp()}
-     focusSearch={() => this.inputFocus()}
+     toggle={this.openHelp}
+     focusSearch={this.inputFocus}
     />
+    <div className="logo">
+     <div className="logo_dot" id="dot_1" />
+     <div className="logo_dot" id="dot_2" />
+     <div className="logo_dot" id="dot_3" />
+    </div>
     <SearchBar />
    </div>
   );

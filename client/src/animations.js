@@ -1,4 +1,4 @@
-import { TweenMax } from 'gsap';
+import { TweenMax, Elastic } from 'gsap';
 
 export default {
  dropDown(target, number) {
@@ -18,5 +18,22 @@ export default {
  },
  shakeModal(target) {
   return TweenMax.to(target, 0.06, { x: '+=6', yoyo: true, repeat: 5 });
+ },
+ dotDrop(target) {
+  return TweenMax.staggerFrom(
+   target,
+   1.8,
+   {
+    top: -50,
+    ease: Elastic.easeOut,
+    delay: 0.6
+   },
+   0.3
+  );
+ },
+ sideBarOpen(target) {
+  return TweenMax.from(target, 1, {
+   width: 0
+  });
  }
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { searchEngineCode } from '../data/shortcutData';
-import './SearchBar.css'
+import './SearchBar.css';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -37,44 +37,49 @@ class SearchBar extends Component {
     if (translateText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 6);
      this.actionSearch(t, item[1], item[2]);
+     input.value = '';
     }
 
     if (searchText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 4);
      this.actionSearch(t, item[1], item[2]);
+     input.value = '';
     }
    });
 
-   if (x.which == 13)
+   if (x.which == 13) {
     this.actionSearch(t, 'google.it/?gws_rd=ssl#q=', 'Google');
+    input.value = '';
+   }
   }
  };
 
- componentDidMount(){
-   this.changePlaceholder()
+
+ componentDidMount() {
+  this.changePlaceholder();
  }
 
  changePlaceholder = () => {
-   let placeholderArr = [
-     'Aliens riding cows .un',
-     'Oranges .aa',
-     'I\'m calling a function but is not answering the phone .st',
-     'How to program an app .gt',
-     'Moonwalk tutorial .yy',
-     'Niki\'s Mom .ph',
-     'Codeworks .mm',
-     'THC .ww',
-     'How to make pasta alla puttanesca .wh',
-     'gonewild .re'
-   ]
-  setInterval(()=>{
-    let i = Math.floor(Math.random() * placeholderArr.length)
-    console.log(i);
-    this.setState({
-     placeholder: placeholderArr[i]
-    })
-  }, 4000)
- }
+  let placeholderArr = [
+   'Aliens riding cows .un',
+   'Oranges .aa',
+   "I'm calling a function but is not answering the phone .st",
+   'How to program an app .gt',
+   'Moonwalk tutorial .yy',
+   "Niki's Mom .ph",
+   'Codeworks .mm',
+   'THC .ww',
+   'How to make pasta alla puttanesca .wh',
+   'gonewild .re'
+  ];
+  setInterval(() => {
+   let i = Math.floor(Math.random() * placeholderArr.length);
+
+   this.setState({
+    placeholder: placeholderArr[i]
+   });
+  }, 4000);
+ };
 
  // RENDER =========================
 

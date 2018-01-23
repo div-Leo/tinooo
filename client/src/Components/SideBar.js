@@ -18,6 +18,11 @@ class SideBar extends Component {
   };
  }
 
+ componentDidMount() {
+  // let element = document.querySelector('.side_container');
+  // animations.sideBarOpen(element);
+ }
+
  getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
 
  heightOfLi = (id, list) => {
@@ -69,11 +74,21 @@ class SideBar extends Component {
   this.props.focusSearch();
  }
 
+ anim() {
+  let element = document.querySelector('.side_container');
+  console.log(element);
+  // animations.sideBarOpen(element);
+ }
+
  // RENDER =========
 
  render() {
   return this.props.shown ? (
    <div className="side_container">
+    <div idk={this.anim()} className="side_button_x">
+     <div className="side_line" id="line_1" />
+     <div className="side_line" id="line_2" />
+    </div>
     <Profile
      logged={bool => this.loggedIn(bool)}
      setUserData={data => this.setUserData(data)}
@@ -189,7 +204,14 @@ class SideBar extends Component {
      close={this.close.bind(this)}
     />
    </div>
-  ) : null;
+  ) : (
+   <div>
+    <div className="side_button" onClick={this.props.toggle}>
+     <div className="side_line" />
+     <div className="side_line" />
+    </div>
+   </div>
+  );
  }
 }
 
