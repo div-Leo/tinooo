@@ -44,11 +44,13 @@ class SideBar extends Component {
  };
 
  show() {
+  this.props.changeFocus(false);
   console.log('show');
   this.setState({ showModal: true });
  }
 
  close() {
+  this.props.changeFocus(true);
   console.log('close');
   this.setState({ showModal: false });
  }
