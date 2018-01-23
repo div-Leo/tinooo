@@ -27,7 +27,8 @@ const userDB = async userData => {
       email: userData.email,
       accessToken: userData.accessToken,
       profile_picture: userData.profile_picture,
-      shortcutsList: userData.shortcutsList
+      shortcutsList: userData.shortcutsList,
+      searchesList: userData.searchesList
      }
     }
    );
@@ -47,7 +48,8 @@ module.exports.authFacebook = async (ctx, next) => {
   id: ctx.request.body.id,
   accessToken: ctx.request.body.accessToken,
   profile_picture: ctx.request.body.picture.data.url,
-  shortcutsList: []
+  shortcutsList: [],
+  searchesList: []
  };
  let authResult = await axios.get(config.facebook.validateUrl, {
   headers: {
@@ -69,7 +71,8 @@ module.exports.authGoogle = async (ctx, next) => {
   id: ctx.request.body.profileObj.googleId,
   accessToken: ctx.request.body.Zi.access_token,
   profile_picture: ctx.request.body.profileObj.imageUrl,
-  shortcutsList: []
+  shortcutsList: [],
+  searchesList: []
  };
  let authResult = await axios.get(
   config.google.validateUrl + ctx.request.body.tokenId,
