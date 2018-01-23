@@ -31,9 +31,8 @@ export default {
    0.3
   );
  },
- searchBarOpen(target) {
+ sideBarOpen(target) {
   return TweenMax.from(target, 1, {
-   height: 0,
    width: 0
   });
  }
