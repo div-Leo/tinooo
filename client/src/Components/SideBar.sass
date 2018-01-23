@@ -1,4 +1,6 @@
 .side_container
+	position: relative
+	left: 0
 	width: 430px
 	height: 100vh
 	padding: 30px 40px
@@ -6,6 +8,12 @@
 	box-shadow: 0 0 7px 3px rgba(40, 40, 40, 0.1)
 	overflow-y: scroll
 	z-index: 1000
+	transition: left 1s ease
+
+.side_container--close
+	left: -480px
+	transition: left 1s ease
+
 
 .side_title
 	font-size: 2.5em
@@ -90,8 +98,9 @@
 .side_button
 	position: absolute
 	top: 60px
-	left: 30px
+	left: 15px
 	transition: all 1s ease
+	cursor: pointer
 
 	.side_line
 		height: 6px
@@ -105,6 +114,7 @@
 	top: 60px
 	left: 490px
 	transition: all 1s ease
+	cursor: pointer
 
 	.side_line
 		height: 6px
@@ -114,8 +124,8 @@
 		transition: all 1s ease
 		position: absolute
 
-	#line_1
+	.line_1
 		transform: rotateZ(-45deg)
 
-	#line_2
+	.line_2
 		transform: rotateZ(45deg)

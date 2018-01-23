@@ -46,15 +46,16 @@ class Profile extends Component {
    });
  };
 
- updateLocalStorage = data => {
-  let localData = JSON.parse(localStorage.getItem('userShortcuts'))
+ updateLocalShortage = (data, userList) => {
+  let localData = JSON.parse(localStorage.getItem(userList))
    .split(',')
    .push(data)
    .join(',');
-  localStorage.setItem('userShortcuts', JSON.stringify(localData));
+  localStorage.setItem(userList, JSON.stringify(localData));
  };
 
  login = async () => {
+  localStorage.setItem('userSearches', []);
   if (localStorage.getItem('accessToken')) {
    await this.props.logged(true);
    await fetch('http://localhost:3001/login', {
@@ -66,7 +67,9 @@ class Profile extends Component {
     .then(data => {
      this.props.setUserData(data);
      // localStorage.setItem('userSearches', data.searches);
-     if (data.shortcuts) this.updateLocalStorage(data.shortcuts);
+     if (data.shortcuts)
+      this.updateLocalStorage(data.shortcuts, 'userShortcuts');
+     if (data.searches) this.updateLocalStorage(data.searches, 'userSearches');
     });
   }
  };

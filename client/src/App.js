@@ -65,19 +65,40 @@ class App extends Component {
  };
 
  openHelp = () => {
-  //TODO: delete cookie ?
-  //TODO: toggle sideBar - done
   this.setState({
    toggleSide: !this.state.toggleSide
   });
-  // let element = document.querySelector('.side_container');
-  // animations.sideBarOpen(element);
+ };
+
+ textSearch = (x, input) => {
+  console.log(input);
+  if (localStorage.getItem('userSearches')) {
+   let historySearch = localStorage.getItem('userSearches').split(',');
+   let countHistory = historySearch.length;
+   if (
+    (countHistory < historySearch.length && countHistory > 0) ||
+    (countHistory == 0 && x == 0) ||
+    (countHistory == historySearch.length && x == 1)
+   ) {
+    if (x) {
+     countHistory--;
+     input.value = historySearch[countHistory];
+    } else {
+     countHistory++;
+     input.value = historySearch[countHistory];
+    }
+   }
+  }
  };
 
  grabEvent = e => {
   switch (e.which) {
    case 18:
     this.openHelp();
+   case 38:
+    this.textSearch(1, e.target); // up
+   case 40:
+    this.textSearch(0, e.target); // down
    default:
     return;
   }
