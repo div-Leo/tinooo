@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { searchEngineCode } from '../data/shortcutData';
-import './SearchBar.css'
+import './SearchBar.css';
+
+import animations from '../animations';
 
 class SearchBar extends Component {
+ componentDidMount() {
+  const search = document.querySelector('#search-bar');
+  animations.searchBarOpen(search);
+ }
+
  actionSearch = (text, link, name) => {
   console.log('text:', text, 'link:', link, 'name:', name);
 
