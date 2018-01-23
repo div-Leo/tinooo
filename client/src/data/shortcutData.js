@@ -1,10 +1,9 @@
 export const searchEngineCode = new Array(
- '.aa amazon.it/s?field-keywords= Amazon',
+ '.aa amazon.com/s?field-keywords= Amazon',
  '.yy youtube.com/results?search_query= YouTube',
- '.mm google.it/maps/search/ Google_Maps',
+ '.mm google.it/maps/search/ Maps',
  '.ww it.wikipedia.org/w/index.php?search= Wikipedia',
- '.ii google.it/search?site=imghp&tbm=isch&q= Google_Immagini',
- '.ff cb01.eu/cerca/?q= CineBlog01',
+ '.ii google.it/search?site=imghp&tbm=isch&q= Images',
  '.f1 facebook.com/search/top/?q= Facebook',
  '.33 youtubeinmp3.com/it/download/?video= YouTubeInMP3',
  '.ic iconfinder.com/search/?q= Iconfinder',
@@ -15,16 +14,16 @@ export const searchEngineCode = new Array(
  '.st stackoverflow.com/search?q= StackOverflow',
  '.md developer.mozilla.org/it/search?q= MDN',
  '.cp codepen.io/search/pens?q= Codepen',
- '.in www.instagram.com/explore/tags/ Instagram_Tags',
+ '.in www.instagram.com/explore/tags/ Instagram',
  '.np www.npmjs.com/search?q= npm',
+ '.gt github.com/search?utf8=✓&q= github',
+ '.me medium.com/search?q= Medium',
+ '.re www.reddit.com/search?q= Reddit',
+ '.wh www.wikihow.it/wikiHowTo?search= WikiHow',
  'it-en translate.google.com/#it/en/ IT->EN',
  'en-it translate.google.com/#en/it/ EN->IT',
- 'it-fr translate.google.com/#it/fr/ IT->FR',
- 'fr-it translate.google.com/#fr/it/ FR->IT',
- 'it-es translate.google.com/#it/es IT->ES',
- 'es-it translate.google.com/#es/it ES->IT',
- 'it-de translate.google.com/#it/de IT->DE',
- 'de-it translate.google.com/#de/it DE->IT'
+ 'en-es translate.google.com/#en/es EN->ES',
+ 'es-en translate.google.com/#es/en ES->EN',
 );
 
 export const shortcutCode = new Array(

@@ -21,7 +21,7 @@ router
  .put('/shortcuts', authorize, shortcutCtrl.editShortcuts)
  .delete('/shortcuts', authorize, shortcutCtrl.resetShortcuts)
 
- .post('/searches', searchesCtrl.postSearchesHistory)
- .delete('/searches', searchesCtrl.resetSearchesHistory);
+ .post('/searches', authorize, searchesCtrl.postSearchesHistory)
+ .delete('/searches', authorize, searchesCtrl.resetSearchesHistory);
 
 module.exports = router;

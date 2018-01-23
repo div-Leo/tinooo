@@ -3,6 +3,12 @@ import { searchEngineCode } from '../data/shortcutData';
 import './SearchBar.css'
 
 class SearchBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      placeholder: 'Tinooo .gt',
+    }
+  }
  actionSearch = (text, link, name) => {
   console.log('text:', text, 'link:', link, 'name:', name);
 
@@ -44,6 +50,32 @@ class SearchBar extends Component {
   }
  };
 
+ componentDidMount(){
+   this.changePlaceholder()
+ }
+
+ changePlaceholder = () => {
+   let placeholderArr = [
+     'Aliens riding cows .un',
+     'Oranges .aa',
+     'I\'m calling a function but is not answering the phone .st',
+     'How to program an app .gt',
+     'Moonwalk tutorial .yy',
+     'Niki\'s Mom .ph',
+     'Codeworks .mm',
+     'THC .ww',
+     'How to make pasta alla puttanesca .wh',
+     'gonewild .re'
+   ]
+  setInterval(()=>{
+    let i = Math.floor(Math.random() * placeholderArr.length)
+    console.log(i);
+    this.setState({
+     placeholder: placeholderArr[i]
+    })
+  }, 4000)
+ }
+
  // RENDER =========================
 
  render() {
@@ -53,7 +85,7 @@ class SearchBar extends Component {
      onKeyUp={e => this.searchWithBrain(e)}
      id="search-bar"
      className="searchbar"
-     placeholder="Something"
+     placeholder={this.state.placeholder}
      type="Text"
     />
    </div>
