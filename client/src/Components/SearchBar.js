@@ -3,22 +3,38 @@ import { searchEngineCode } from '../data/shortcutData';
 import './SearchBar.css';
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      placeholder: 'Tinooo .gt',
-    }
-  }
+ constructor(props) {
+  super(props);
+  this.state = {
+   placeholder: 'Tinooo .gt'
+  };
+ }
  actionSearch = (text, link, name) => {
-  console.log('text:', text, 'link:', link, 'name:', name);
-
   const fullTextSearch = text
    .split('&')
    .join('%26')
    .split(' ')
    .join('+');
-
   window.open('http://' + link + fullTextSearch, '');
+  if (localStorage.getItem('accessToken')) {
+   fetch(`http://localhost:3001/searches`, {
+    method: 'POST',
+    body: JSON.stringify(text),
+    headers: {
+     'Content-Type': 'application/json',
+     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }
+   });
+   this.concatSearches(text);
+  }
+ };
+
+ concatSearches = async str => {
+  let localSearches = await localStorage.getItem('userSearches');
+  let data = localSearches.split(',');
+  data.push(str);
+  let newData = data.join(',');
+  await localStorage.setItem('userSearches', newData);
  };
 
  searchWithBrain = x => {
@@ -37,12 +53,14 @@ class SearchBar extends Component {
     if (translateText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 6);
      this.actionSearch(t, item[1], item[2]);
+
      input.value = '';
     }
 
     if (searchText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 4);
      this.actionSearch(t, item[1], item[2]);
+
      input.value = '';
     }
    });
@@ -53,7 +71,6 @@ class SearchBar extends Component {
    }
   }
  };
-
 
  componentDidMount() {
   this.changePlaceholder();
