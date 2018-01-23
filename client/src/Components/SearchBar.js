@@ -3,13 +3,12 @@ import { searchEngineCode } from '../data/shortcutData';
 import './SearchBar.css';
 
 class SearchBar extends Component {
- constructor(props) {
-  super(props);
-  this.state = {
-   placeholder: 'Tinooo .gt'
-  };
- }
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      placeholder: 'Tinooo .gt',
+    }
+  }
  actionSearch = (text, link, name) => {
   console.log('text:', text, 'link:', link, 'name:', name);
 
@@ -54,6 +53,7 @@ class SearchBar extends Component {
    }
   }
  };
+
 
  componentDidMount() {
   this.changePlaceholder();
