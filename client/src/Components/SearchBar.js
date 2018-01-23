@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { searchEngineCode } from '../data/shortcutData';
+import { searchEngineCode, shortcutCode } from '../data/shortcutData';
 import './SearchBar.css';
 
 class SearchBar extends Component {
@@ -37,12 +37,36 @@ class SearchBar extends Component {
   await localStorage.setItem('userSearches', newData);
  };
 
+ reset = () => {
+   if (localStorage.getItem('accessToken')) {
+    fetch(`http://localhost:3001/searches`, {
+     method: 'DELETE',
+     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+     }
+    });
+    fetch(`http://localhost:3001/shortcuts`, {
+     method: 'DELETE',
+     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+     }
+    });
+  }
+ }
+
  searchWithBrain = x => {
   const input = x.target;
   if (input.value.trim() !== '') {
    let t = input.value.trim();
 
-   if (t === 'reset tinooo') input.value = ''; // TODO: reset cache
+  if (t === 'reset tinooo'){
+    this.reset();
+    localStorage.setItem('userSearches', []);
+    localStorage.setItem('userShortcuts', shortcutCode);
+    input.value = '';
+  }
 
    let searchText = t.trim().slice(t.trim().length - 4, t.trim().length);
 
@@ -53,14 +77,12 @@ class SearchBar extends Component {
     if (translateText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 6);
      this.actionSearch(t, item[1], item[2]);
-
      input.value = '';
     }
 
     if (searchText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 4);
      this.actionSearch(t, item[1], item[2]);
-
      input.value = '';
     }
    });

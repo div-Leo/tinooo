@@ -20,6 +20,6 @@ module.exports.editShortcuts = async ctx => {
 
 module.exports.resetShortcuts = async ctx => {
  if ('DELETE' != ctx.method) return await next();
- await User.update({ email: ctx.user.email },{ $set: { shortcutsList: ctx.request.body } });
+ await User.update({ email: ctx.user.email },{ $set: { shortcutsList: [] } });
  ctx.status = 200;
 };
