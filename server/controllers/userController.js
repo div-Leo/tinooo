@@ -27,8 +27,6 @@ const userDB = async userData => {
       email: userData.email,
       accessToken: userData.accessToken,
       profile_picture: userData.profile_picture,
-      shortcutsList: userData.shortcutsList,
-      searchesList: userData.searchesList
      }
     }
    );

@@ -46,12 +46,13 @@ class Profile extends Component {
    });
  };
 
- updateLocalShortage = (data, userList) => {
-  let localData = JSON.parse(localStorage.getItem(userList))
-   .split(',')
-   .push(data)
-   .join(',');
-  localStorage.setItem(userList, JSON.stringify(localData));
+ updateLocalStorage = (data, userList) => {
+  let localData = localStorage.getItem(userList).split(',')
+  data.forEach(str => {
+    localData.push(str)
+  })
+  let newData = localData.join(',');
+  localStorage.setItem(userList, newData);
  };
 
  login = async () => {
@@ -66,10 +67,9 @@ class Profile extends Component {
     .then(res => res.json())
     .then(data => {
      this.props.setUserData(data);
-     // localStorage.setItem('userSearches', data.searches);
-     if (data.shortcuts)
-      this.updateLocalStorage(data.shortcuts, 'userShortcuts');
-     if (data.searches) this.updateLocalStorage(data.searches, 'userSearches');
+     if (data.shortcutsList)
+      this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
+     if (data.searchesList) this.updateLocalStorage(data.searchesList, 'userSearches');
     });
   }
  };
@@ -91,7 +91,6 @@ class Profile extends Component {
 
      <div onClick={() => this.logout()} className="profile_logout">
       <span>log out</span>
-      <img src={logout} />
      </div>
     </div>
    </div>

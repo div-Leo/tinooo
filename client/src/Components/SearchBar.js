@@ -19,7 +19,7 @@ class SearchBar extends Component {
   if (localStorage.getItem('accessToken')) {
    fetch(`http://localhost:3001/searches`, {
     method: 'POST',
-    body: JSON.stringify(text),
+    body: JSON.stringify({ search: text }),
     headers: {
      'Content-Type': 'application/json',
      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -91,7 +91,6 @@ class SearchBar extends Component {
   ];
   setInterval(() => {
    let i = Math.floor(Math.random() * placeholderArr.length);
-
    this.setState({
     placeholder: placeholderArr[i]
    });

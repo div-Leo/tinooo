@@ -7,10 +7,10 @@ const User = db.get('users');
 
 module.exports.postSearchesHistory = async ctx => {
  if ('POST' != ctx.method) return await next();
- ctx.user.searchesList.push(ctx.request.body);
+ ctx.user.searchesList.push(ctx.request.body.search);
  await User.update(
   { email: ctx.user.email },
-  { $set: { searchesHistory: ctx.user.searchesList } }
+  { $set: { searchesList: ctx.user.searchesList } }
  );
  ctx.status = 200;
 };

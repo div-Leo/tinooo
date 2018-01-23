@@ -10,7 +10,6 @@ export const searchEngineCode = new Array(
  '.un unsplash.com/search?keyword= Unsplash',
  '.pi pinterest.com/search/pins/?q= Pinterest',
  '.si sinonimi-contrari.it/ Sinonimi',
- '.ss guardaserie.online/?s= Guardaserie',
  '.st stackoverflow.com/search?q= StackOverflow',
  '.md developer.mozilla.org/it/search?q= MDN',
  '.cp codepen.io/search/pens?q= Codepen',
