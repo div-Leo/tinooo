@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { searchEngineCode } from '../data/shortcutData';
 import './SearchBar.css';
 
-import animations from '../animations';
-
 class SearchBar extends Component {
  constructor(props) {
   super(props);
@@ -11,6 +9,7 @@ class SearchBar extends Component {
    placeholder: 'Tinooo .gt'
   };
  }
+
  actionSearch = (text, link, name) => {
   console.log('text:', text, 'link:', link, 'name:', name);
 
@@ -39,16 +38,20 @@ class SearchBar extends Component {
     if (translateText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 6);
      this.actionSearch(t, item[1], item[2]);
+     input.value = '';
     }
 
     if (searchText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 4);
      this.actionSearch(t, item[1], item[2]);
+     input.value = '';
     }
    });
 
-   if (x.which == 13)
+   if (x.which == 13) {
     this.actionSearch(t, 'google.it/?gws_rd=ssl#q=', 'Google');
+    input.value = '';
+   }
   }
  };
 
@@ -71,7 +74,7 @@ class SearchBar extends Component {
   ];
   setInterval(() => {
    let i = Math.floor(Math.random() * placeholderArr.length);
-   console.log(i);
+
    this.setState({
     placeholder: placeholderArr[i]
    });

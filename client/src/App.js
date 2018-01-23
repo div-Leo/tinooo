@@ -70,6 +70,8 @@ class App extends Component {
   this.setState({
    toggleSide: !this.state.toggleSide
   });
+  // let element = document.querySelector('.side_container');
+  // animations.sideBarOpen(element);
  };
 
  grabEvent = e => {
@@ -97,10 +99,11 @@ class App extends Component {
     onKeyDown={e => this.grabEvent(e)}
    >
     <SideBar
+     id="sidebar_container"
      changeFocus={this.changeFocusMode}
      shown={this.state.toggleSide}
-     toggle={() => this.openHelp()}
-     focusSearch={() => this.inputFocus()}
+     toggle={this.openHelp}
+     focusSearch={this.inputFocus}
     />
     <div className="logo">
      <div className="logo_dot" id="dot_1" />
