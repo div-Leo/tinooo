@@ -14,7 +14,10 @@ const secretKey = 'ctrl';
 class App extends Component {
  constructor(props) {
   super(props);
-  this.state = { toggleSide: true };
+  this.state = {
+   toggleSide: false,
+   autofocus: true
+  };
   this.checkLocalStorage();
  }
 
@@ -48,8 +51,10 @@ class App extends Component {
  };
 
  inputFocus = () => {
-  const input = document.querySelector('#search-bar');
-  input.focus();
+  if (this.state.autofocus) {
+   const input = document.querySelector('#search-bar');
+   input.focus();
+  }
  };
 
  openHelp = () => {
@@ -69,16 +74,23 @@ class App extends Component {
   }
  };
 
+ changeFocusMode = automatic => {
+  this.setState({
+   autofocus: automatic
+  });
+ };
+
  // RENDER =========================
 
  render() {
   return (
    <div
     className="App"
-    // onClick={this.inputFocus}
+    onClick={this.inputFocus}
     onKeyDown={e => this.grabEvent(e)}
    >
     <SideBar
+     changeFocus={this.changeFocusMode}
      shown={this.state.toggleSide}
      toggle={() => this.openHelp()}
      focusSearch={() => this.inputFocus()}
