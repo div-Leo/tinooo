@@ -13,6 +13,9 @@ class Profile extends Component {
  constructor(props) {
   super(props);
   this.state = {};
+  if (localStorage.getItem('accessToken')) {
+   this.login();
+  }
  }
 
  // Facebook
@@ -47,10 +50,10 @@ class Profile extends Component {
  };
 
  updateLocalStorage = (data, userList) => {
-  let localData = localStorage.getItem(userList).split(',')
+  let localData = localStorage.getItem(userList).split(',');
   data.forEach(str => {
-    localData.push(str)
-  })
+   localData.push(str);
+  });
   let newData = localData.join(',');
   localStorage.setItem(userList, newData);
  };
@@ -67,8 +70,10 @@ class Profile extends Component {
     .then(res => res.json())
     .then(data => {
      this.props.setUserData(data);
-     if (data.shortcutsList.length > 0) this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
-     if (data.searchesList.length > 0) this.updateLocalStorage(data.searchesList, 'userSearches');
+     if (data.shortcutsList.length > 0)
+      this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
+     if (data.searchesList.length > 0)
+      this.updateLocalStorage(data.searchesList, 'userSearches');
     });
   }
  };
@@ -101,7 +106,7 @@ class Profile extends Component {
      <FacebookLogin
       cssClass="profile_login_button profile_login_button--facebook"
       appId="180949189168618"
-      autoLoad={true}
+      autoLoad={false}
       fields="name, email, picture"
       scope="public_profile,user_friends,user_actions.books,email"
       callback={this.responseFb}

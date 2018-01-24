@@ -3,6 +3,9 @@ import Modal, { closeStyle } from 'simple-react-modal';
 import animations from '../animations';
 import './ModalAdd.css';
 
+import { shortcut } from '../data/sc.min';
+const secretKey = 'ctrl';
+
 class ModalAdd extends Component {
  constructor(props) {
   super(props);
@@ -48,8 +51,26 @@ class ModalAdd extends Component {
   });
  };
 
+ addShortcut = (a, b) => {
+  shortcut.add(secretKey + '+' + a, function() {
+   window.open('http://' + b, '');
+  });
+ };
+
+ getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
+
+ socialBtn = () => {
+  let shortcutData = this.getShortcuts();
+  for (let i = 0; i < shortcutData.length; i++) {
+   this.addShortcut(
+    shortcutData[i].split(' ')[0],
+    shortcutData[i].split(' ')[1]
+   );
+  }
+ };
+
  sendShortcutDB = async str => {
-  this.props.close()
+  this.props.close();
   await fetch('http://localhost:3001/shortcuts', {
    method: 'POST',
    body: JSON.stringify({ shortcut: str }),
@@ -66,6 +87,7 @@ class ModalAdd extends Component {
   data.push(str);
   let newData = data.join(',');
   await localStorage.setItem('userShortcuts', newData);
+  await this.socialBtn();
  };
 
  closeModal = f => {
