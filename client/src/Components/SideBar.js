@@ -174,8 +174,10 @@ componentWillReceiveProps(nextProps){
       </div>
       <div>
        <div className="side_li_about_item">
-        <h2>Incognito</h2>
-        <p>Incognito will allow you to search history-free with confidence.</p>
+        <h2>Open Menu</h2>
+        <p>You can open and close the menu really quick pressing <i>'alt'</i>.</p>
+        {/* <h2>Incognito</h2>
+        <p>Incognito will allow you to search history-free with confidence.</p> */}
        </div>
        <div className="side_li_about_item">
         <h2>Reset</h2>
