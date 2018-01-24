@@ -25,7 +25,7 @@ export default {
    1.8,
    {
     top: -50,
-    ease: Elastic.easeOut,
+    ease: Elastic.easeOut.config(0.9, 0.5),
     delay: 0.6
    },
    0.3
