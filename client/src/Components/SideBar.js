@@ -18,12 +18,6 @@ class SideBar extends Component {
   };
  }
 
- componentDidMount() {
-  console.log('hellloooo');
-  // let element = document.querySelector('.side_container');
-  // animations.sideBarOpen(element);
- }
-
  getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
 
  heightOfLi = (id, list) => {
@@ -34,7 +28,6 @@ class SideBar extends Component {
 
  openLi = async (e, id, list) => {
   let num;
-  console.log('LIST======', list);
   list ? (num = this.heightOfLi(id, list)) : (num = 280);
   const target = document.querySelector(`#${id}`);
   if (this.state[id]) {
@@ -51,13 +44,12 @@ class SideBar extends Component {
 
  show() {
   this.props.changeFocus(false);
-  console.log('show');
   this.setState({ showModal: true });
  }
 
  close() {
   this.props.changeFocus(true);
-  console.log('close');
+  this.props.toggle()
   this.setState({ showModal: false });
  }
 
@@ -75,12 +67,20 @@ class SideBar extends Component {
   this.props.focusSearch();
  }
 
- // anim() {
- //  let element = document.querySelector('.side_container');
- //  console.log(element);
- //  // animations.sideBarOpen(element);
- // }
-
+componentWillReceiveProps(nextProps){
+  this.setState({
+    shortcuts: false,
+    codes: false,
+    more: false,
+    about: false
+  })
+  if (this.props.shown !== nextProps.shown) {
+    const target = document.querySelector(`.side_li`);
+    const arrow = document.querySelector(`.side_li_arrow`);
+    animations.dropUp(target);
+    animations.turnArrow(arrow, 0);
+  }
+}
  // RENDER =========
 
  render() {

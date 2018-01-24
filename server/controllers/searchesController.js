@@ -19,7 +19,7 @@ module.exports.resetSearchesHistory = async ctx => {
  if ('DELETE' != ctx.method) return await next();
  await User.update(
   { email: ctx.user.email },
-  { $set: { searchesHistory: ' ' } }
+  { $set: { searchesList: [] } }
  );
  ctx.status = 200;
 };

@@ -34,9 +34,10 @@ class App extends Component {
  }
 
  checkLocalStorage = () => {
-  localStorage.getItem('userShortcuts')
-   ? false
-   : localStorage.setItem('userShortcuts', shortcutCode);
+  // localStorage.getItem('userShortcuts')
+  //  ? false
+  //  :
+   localStorage.setItem('userShortcuts', shortcutCode);
  };
 
  addShortcut = (a, b) => {
@@ -76,8 +77,6 @@ class App extends Component {
    if (!this.state.countHistory) {
      this.state.countHistory = historySearch.length
    }
-   console.log('countHistory',this.state.countHistory);
-   console.log('historySearch',historySearch.length);
    if (
     (this.state.countHistory < historySearch.length && this.state.countHistory > 0) ||
     (this.state.countHistory == 0 && x == 0) ||
@@ -89,11 +88,10 @@ class App extends Component {
     } else {
      this.state.countHistory++;
      historySearch[this.state.countHistory]
-     ? input.value = historySearch[this.state.countHistory] 
+     ? input.value = historySearch[this.state.countHistory]
      : input.value = '';
     }
    }
-   console.log('//////////////////////////');
   }
  };
 
