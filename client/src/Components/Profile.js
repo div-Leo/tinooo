@@ -67,18 +67,16 @@ class Profile extends Component {
     .then(res => res.json())
     .then(data => {
      this.props.setUserData(data);
-     if (data.shortcutsList.length > 0)
-      this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
-      console.log(data.searchesList.length);
+     if (data.shortcutsList.length > 0) this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
      if (data.searchesList.length > 0) this.updateLocalStorage(data.searchesList, 'userSearches');
     });
   }
  };
 
  logout = () => {
-  // TODO: clean localStorage
   localStorage.removeItem('accessToken');
   localStorage.setItem('userShortcuts', shortcutCode);
+  localStorage.setItem('userSearches', []);
   this.props.logout();
  };
 

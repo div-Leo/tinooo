@@ -1,3 +1,5 @@
+@import "../app.sass"
+
 .side_container
 	position: relative
 	left: 0
@@ -21,22 +23,23 @@
 	margin-bottom: 30px
 
 .side_text
-	color: #aaa
+	color: $texts
 	font-size: 1em
 	font-weight: 300
 	margin-bottom: 30px
 
 .side_li_text
-	color: #aaa
+	color: $texts
 
 .side_li_add
+	cursor: pointer
 	font-weight: 800 !important
 
 .side_li
 	height: 20px
 	padding: 20px 0
 	margin-top: 25px
-	border-bottom: 2px solid #ddd
+	border-bottom: 2px solid $texts
 	overflow: hidden
 	display: flex
 	flex-direction: column
@@ -56,7 +59,7 @@
 	width: 0
 	border-top: 10px solid transparent
 	border-bottom: 10px solid transparent
-	border-left: 15px solid black
+	border-left: 15px solid $titles
 	margin-right: 15px
 
 .side_li_item
@@ -65,7 +68,7 @@
 	align-items: center
 	padding: 0 15px
 	height: 45px
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid $texts
 
 	h3
 		font-weight: 300
@@ -75,7 +78,7 @@
 	flex-direction: column
 
 	padding: 15px 15px
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid $texts
 
 	h2
 		margin-top: 20px
@@ -83,7 +86,7 @@
 		font-size: 1.5em
 
 	p
-		color: #aaa
+		color: $texts
 		font-weight: 300
 		font-size: 1.1em
 		margin-top: 0
@@ -105,7 +108,7 @@
 	.side_line
 		height: 6px
 		width: 40px
-		background-color: black
+		background-color: $titles
 		margin-bottom: 10px
 		transition: all 1s ease
 
@@ -119,7 +122,7 @@
 	.side_line
 		height: 6px
 		width: 40px
-		background-color: black
+		background-color: $titles
 		margin-bottom: 10px
 		transition: all 1s ease
 		position: absolute

@@ -42,7 +42,6 @@ class ModalAdd extends Component {
  };
 
  denyEntry = () => {
-  // TODO: function to shake modal and request new shortcut
   const element = document.querySelector('#modal');
   animations.shakeModal(element);
   this.setState({
@@ -51,6 +50,7 @@ class ModalAdd extends Component {
  };
 
  sendShortcutDB = async str => {
+  this.props.close()
   await fetch('http://localhost:3001/shortcuts', {
    method: 'POST',
    body: JSON.stringify({ shortcut: str }),

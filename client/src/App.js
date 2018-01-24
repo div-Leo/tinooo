@@ -34,9 +34,10 @@ class App extends Component {
  }
 
  checkLocalStorage = () => {
-  localStorage.getItem('userShortcuts')
-   ? false
-   : localStorage.setItem('userShortcuts', shortcutCode);
+  // localStorage.getItem('userShortcuts')
+  //  ? false
+  //  :
+   localStorage.setItem('userShortcuts', shortcutCode);
  };
 
  addShortcut = (a, b) => {
