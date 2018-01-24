@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Modal, { closeStyle } from 'simple-react-modal';
 import animations from '../animations';
-
 import './ModalAdd.css';
 
 class ModalAdd extends Component {
