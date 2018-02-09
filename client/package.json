@@ -23,5 +23,8 @@
   "build": "npm-run-all build-css build-js",
   "test": "react-scripts test --env=jsdom",
   "eject": "react-scripts eject"
+ },
+ "devDependencies": {
+  "app-overview": "0.0.21"
  }
 }
