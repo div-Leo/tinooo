@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Modal, { closeStyle } from 'simple-react-modal';
-
+import animations from '../animations';
 import './ModalAdd.css';
+
+import { shortcut } from '../data/sc.min';
+const secretKey = 'ctrl';
 
 class ModalAdd extends Component {
  constructor(props) {
@@ -9,31 +12,82 @@ class ModalAdd extends Component {
   this.state = {
    name: '',
    shortcut: '',
-   url_link: ''
+   url_link: '',
+   deny: '',
+   db_shortcuts: ''
   };
  }
 
  keypressData = async e => {
+  const keyEnter = e.which;
   await this.setState({
    [e.target.id]: e.target.value
   });
-  await console.log(this.state);
+
   if (
-   e.which === 13 &&
+   keyEnter === 13 &&
    this.state.name !== '' &&
    this.state.url_link !== '' &&
    this.state.shortcut !== ''
   ) {
-   let shortcutData = localStorage.getItem('userShortcuts');
-   console.log(shortcutData);
-   shortcutData.forEach(el => {
+   let shortcutData = localStorage.getItem('userShortcuts').split(',');
+   let taken = shortcutData.some(el => {
     let splitItem = el.split(' ');
-    splitItem[0] !== this.state.shortcut
-     ? // send db
-       false
-     : false;
+    return splitItem[0].toLowerCase() === this.state.shortcut.toLowerCase();
    });
+   !taken
+    ? this.sendShortcutDB(
+       `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
+      )
+    : this.denyEntry();
   }
+ };
+
+ denyEntry = () => {
+  const element = document.querySelector('#modal');
+  animations.shakeModal(element);
+  this.setState({
+   deny: 'Shortcut taken - Please try another'
+  });
+ };
+
+ addShortcut = (a, b) => {
+  shortcut.add(secretKey + '+' + a, function() {
+   window.open('http://' + b, '');
+  });
+ };
+
+ getShortcuts = () => localStorage.getItem('userShortcuts').split(',');
+
+ socialBtn = () => {
+  let shortcutData = this.getShortcuts();
+  for (let i = 0; i < shortcutData.length; i++) {
+   this.addShortcut(
+    shortcutData[i].split(' ')[0],
+    shortcutData[i].split(' ')[1]
+   );
+  }
+ };
+
+ sendShortcutDB = async str => {
+  this.props.close();
+  await fetch('http://localhost:3001/shortcuts', {
+   method: 'POST',
+   body: JSON.stringify({ shortcut: str }),
+   headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+   }
+  }).then(data => this.concatShortcuts(str));
+ };
+
+ concatShortcuts = async str => {
+  let localShortcuts = await localStorage.getItem('userShortcuts');
+  let data = localShortcuts.split(',');
+  data.push(str);
+  let newData = data.join(',');
+  await localStorage.setItem('userShortcuts', newData);
+  await this.socialBtn();
  };
 
  closeModal = f => {
@@ -49,6 +103,7 @@ class ModalAdd extends Component {
   return (
    <div className="modal_window">
     <Modal
+     id="full_modal"
      closeOnOuterClick={true}
      onClose={() => this.closeModal(this.props.close)}
      style={{}}
@@ -76,6 +131,7 @@ class ModalAdd extends Component {
         id="shortcut"
         className="modal_input modal_input--ctrl"
        />
+       <span className="modal_deny_text">{this.state.deny}</span>
       </div>
      </div>
     </Modal>

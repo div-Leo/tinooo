@@ -1,4 +1,27 @@
+$titles: #222
+$bg: white
+$texts: #bbb
+
 .App
 	width: 100vw
 	height: 100vh
 	overflow: hidden
+	color: $titles
+
+.logo
+	position: absolute
+	display: flex
+	left: 50%
+	transform: translate(-50%, -50%)
+	top: 0
+
+.logo_dot
+	background-color: transparent
+	position: relative
+	top: 330px
+	height: 40px
+	width: 40px
+	border-radius: 50%
+	border: 5px solid $titles
+	margin: 15px
+	box-shadow: inset 0 2px 7px 2px rgba(50, 50, 50, 0.2), 0 2px 7px 2px rgba(50, 50, 50, 0.2)

@@ -1,11 +1,23 @@
+@import "../app.sass"
+
 .side_container
+	position: relative
+	left: 0
 	width: 430px
 	height: 100vh
 	padding: 30px 40px
 	flex-direction: column
 	box-shadow: 0 0 7px 3px rgba(40, 40, 40, 0.1)
 	overflow-y: scroll
-	z-index: 1000
+	z-index: 10
+	transition: left 1s ease
+	background-color: white
+
+
+.side_container--close
+	left: -480px
+	transition: left 1s ease
+
 
 .side_title
 	font-size: 2.5em
@@ -13,22 +25,23 @@
 	margin-bottom: 30px
 
 .side_text
-	color: #aaa
+	color: $texts
 	font-size: 1em
 	font-weight: 300
 	margin-bottom: 30px
 
 .side_li_text
-	color: #aaa
+	color: $texts
 
 .side_li_add
+	cursor: pointer
 	font-weight: 800 !important
 
 .side_li
 	height: 20px
 	padding: 20px 0
 	margin-top: 25px
-	border-bottom: 2px solid #ddd
+	border-bottom: 2px solid $texts
 	overflow: hidden
 	display: flex
 	flex-direction: column
@@ -48,7 +61,7 @@
 	width: 0
 	border-top: 10px solid transparent
 	border-bottom: 10px solid transparent
-	border-left: 15px solid black
+	border-left: 15px solid $titles
 	margin-right: 15px
 
 .side_li_item
@@ -57,7 +70,7 @@
 	align-items: center
 	padding: 0 15px
 	height: 45px
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid $texts
 
 	h3
 		font-weight: 300
@@ -67,7 +80,7 @@
 	flex-direction: column
 
 	padding: 15px 15px
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid $texts
 
 	h2
 		margin-top: 20px
@@ -75,7 +88,7 @@
 		font-size: 1.5em
 
 	p
-		color: #aaa
+		color: $texts
 		font-weight: 300
 		font-size: 1.1em
 		margin-top: 0
@@ -86,3 +99,44 @@
 
 #about
 	margin-bottom: 100px
+
+.side_button
+	z-index: 11
+	position: absolute
+	top: 60px
+	left: 15px
+	transition: all 1s ease
+	cursor: pointer
+
+	.side_line
+		height: 6px
+		width: 40px
+		background-color: $titles
+		margin-bottom: 10px
+		transition: all 1s ease
+		position: absolute
+
+	.line_2
+		margin-top: 17px
+
+.side_button_x
+	z-index: 11
+	position: absolute
+	top: 60px
+	left: 490px
+	transition: all 1s ease
+	cursor: pointer
+
+	.side_line
+		height: 6px
+		width: 40px
+		background-color: $titles
+		margin-bottom: 10px
+		transition: all 1s ease
+		position: absolute
+
+	.line_1
+		transform: rotateZ(-45deg)
+
+	.line_2
+		transform: rotateZ(45deg)

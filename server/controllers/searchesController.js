@@ -5,17 +5,21 @@ const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
 
 const User = db.get('users');
 
-module.exports.postSearchesHistory = async (ctx) =>{
-  if ('POST' != ctx.method) return await next();
-  let shortcutsList = ctx.user.searchesHistory.push(ctx.request.body)
-  await User.update({email: ctx.user.email}, {'searchesHistory': shortcutsList});
-  ctx.response.body = shortcutsList;
-  ctx.status=200;
+module.exports.postSearchesHistory = async ctx => {
+ if ('POST' != ctx.method) return await next();
+ ctx.user.searchesList.push(ctx.request.body.search);
+ await User.update(
+  { email: ctx.user.email },
+  { $set: { searchesList: ctx.user.searchesList } }
+ );
+ ctx.status = 200;
 };
 
-module.exports.resetSearchesHistory = async (ctx) =>{
-  if ('DELETE' != ctx.method) return await next();
-  await User.update({email: ctx.user.email}, {'searchesHistory': ' '});
-  ctx.response.body = shortcutsList;
-  ctx.status=200;
+module.exports.resetSearchesHistory = async ctx => {
+ if ('DELETE' != ctx.method) return await next();
+ await User.update(
+  { email: ctx.user.email },
+  { $set: { searchesList: [] } }
+ );
+ ctx.status = 200;
 };

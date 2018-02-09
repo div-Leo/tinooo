@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import empty_profile from '../images/profile_icon.png'
+import empty_profile from '../images/profile_icon.png';
 import GoogleLogin from 'react-google-login';
 import GoogleIcon from 'react-icons/lib/fa/google';
 import './Profile.css';
+
+import logout from '../assets/img/logout.png';
+
+import { shortcutCode } from '../data/shortcutData';
 
 class Profile extends Component {
  constructor(props) {
   super(props);
   this.state = {};
+  if (localStorage.getItem('accessToken')) {
+   this.login();
+  }
  }
 
  // Facebook
@@ -42,67 +49,64 @@ class Profile extends Component {
    });
  };
 
+ updateLocalStorage = (data, userList) => {
+  let localData = localStorage.getItem(userList).split(',');
+  data.forEach(str => {
+   localData.push(str);
+  });
+  let newData = localData.join(',');
+  localStorage.setItem(userList, newData);
+ };
+
  login = async () => {
+  localStorage.setItem('userSearches', []);
   if (localStorage.getItem('accessToken')) {
-   fetch('http://localhost:3001/login', {
+   await this.props.logged(true);
+   await fetch('http://localhost:3001/login', {
     headers: {
      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
     }
    })
     .then(res => res.json())
     .then(data => {
-     this.setState({
-      user: data,
-      logged: true
-     });
-     localStorage.setItem('userSearches', data.searches);
-     localStorage.setItem('userShortcuts', data.shortcuts);
-     // this.getShortcuts()
+     this.props.setUserData(data);
+     if (data.shortcutsList.length > 0)
+      this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
+     if (data.searchesList.length > 0)
+      this.updateLocalStorage(data.searchesList, 'userSearches');
     });
   }
  };
 
- postShortcuts = (shortcut) =>{
-   if (localStorage.getItem('accessToken')) {
-    fetch('http://localhost:3001/shortcuts', {
-     headers: {
-      method: 'POST',
-      body: shortcut,
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
-     }
-    })
-     .then(res => res.json())
-     .then(data => {
-      localStorage.setItem('userSearches', data.searches);
-      localStorage.setItem('userShortcuts', data.shortcuts);
-     });
-   }
- }
-
  logout = () => {
-   // TODO: clean localStorage
   localStorage.removeItem('accessToken');
+  localStorage.setItem('userShortcuts', shortcutCode);
+  localStorage.setItem('userSearches', []);
+  this.props.logout();
  };
 
- renderProfile = open => {
-  return this.state.logged === true ? (
+ renderProfile = () => {
+  return this.props.userData ? (
    <div className="profile_container">
-    <img className="profile_img" src={this.state.user.profile_picture} />
-    <div className="profile_login profile_login--logged">
-     <div className="profile_name">{this.state.user.name}</div>
-     <div className="profile_email">{this.state.user.email}</div>
+    <img className="profile_img" src={this.props.userData.profile_picture} />
+    <div className="profile_login profile_login--loggedIn">
+     <div className="profile_name">{this.props.userData.name}</div>
+     <div className="profile_email">{this.props.userData.email}</div>
+
+     <div onClick={() => this.logout()} className="profile_logout">
+      <span>log out</span>
+     </div>
     </div>
    </div>
   ) : (
    <div className="profile_container">
     <img className="profile_img" src={empty_profile} />
-    {/* onClick={() => this.logout()}  */}
     <div className="profile_login">
      <div className="profile_login_text">Login with:</div>
      <FacebookLogin
-       cssClass="profile_login_button profile_login_button--facebook"
+      cssClass="profile_login_button profile_login_button--facebook"
       appId="180949189168618"
-      autoLoad={true}
+      autoLoad={false}
       fields="name, email, picture"
       scope="public_profile,user_friends,user_actions.books,email"
       callback={this.responseFb}
@@ -111,13 +115,13 @@ class Profile extends Component {
      />
      <div className="profile_login_text">or</div>
      <GoogleLogin
-        clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
-        buttonText="G+"
-        className="profile_login_button profile_login_button--google"
-        scope="profile email"
-        onSuccess={this.responseGoogle}
-        onFailure={this.responseGoogle}
-      ></GoogleLogin>
+      clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
+      buttonText="G+"
+      className="profile_login_button profile_login_button--google"
+      scope="profile email"
+      onSuccess={this.responseGoogle}
+      onFailure={this.responseGoogle}
+     />
     </div>
    </div>
   );
@@ -125,7 +129,7 @@ class Profile extends Component {
 
  // RENDER =========================
  render() {
-  return <div> {this.renderProfile(this.state.logged)}</div>;
+  return <div> {this.renderProfile()}</div>;
  }
 }
 
