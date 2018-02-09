@@ -3,7 +3,8 @@ module.exports = {
     clientId: '180949189168618',
     clientSecret: '730462a2b256000ee4f6ab1da4b132ca',
     profileFields: ['id', 'displayName', 'photos', 'email'],
-    validateUrl: 'https://graph.facebook.com/me'
+    validateUrl: 'https://graph.facebook.com/me',
+    fields: '?fields=id,first_name,email,picture.width(500).height(500),birthday,gender',
   },
   google: {
     client_id: '1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com',

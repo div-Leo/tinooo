@@ -107,8 +107,7 @@ class Profile extends Component {
       cssClass="profile_login_button profile_login_button--facebook"
       appId="180949189168618"
       autoLoad={false}
-      fields="name, email, picture"
-      scope="public_profile,user_friends,user_actions.books,email"
+      fields="name, email, picture.width(500).height(500)"
       callback={this.responseFb}
       textButton=""
       icon="fa-facebook"
