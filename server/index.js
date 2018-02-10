@@ -20,7 +20,7 @@ app
    return await next();
   ctx.token = authorization.split(' ')[1];
   ctx.user = await User.findOne({ accessToken: ctx.token });
-  console.log(ctx.user);
+  console.log('USER ====== ',ctx.user);
   return await next();
  })
  .use(router.routes())
