@@ -9,6 +9,7 @@ const User = db.get('users');
 
 const userDB = async userData => {
  let user = await User.findOne({ email: userData.email });
+ console.log(user);
  if (!user) {
   try {
    user = await User.insert(userData);
