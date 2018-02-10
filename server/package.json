@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
+    "dotenv": "^5.0.0",
     "google-auth-library": "^1.1.0",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",

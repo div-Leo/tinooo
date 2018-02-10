@@ -39,5 +39,6 @@ export const shortcutCode = new Array(
  'C codepen.io Codepen',
  'S stackoverflow.com StackOverflow',
  'M medium.com Medium',
- 'I github.com GitHub',
+ 'H github.com GitHub',
+ 'I linkedin.com Linkedin',
 );

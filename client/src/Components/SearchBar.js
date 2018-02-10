@@ -101,15 +101,14 @@ class SearchBar extends Component {
  changePlaceholder = () => {
   let placeholderArr = [
    'Aliens riding cows .un',
-   'Oranges .aa',
-   "I'm calling a function but is not answering the phone .st",
+   'Camera .aa',
+   "I'm calling a function but she said she's busy .st",
    'How to program an app .gt',
    'Moonwalk tutorial .yy',
-   "Niki's Mom .ph",
-   'Codeworks .mm',
-   'THC .ww',
+   "Array.map .md",
+   'Springfield .mm',
+   'Heisemberg .ww',
    'How to make pasta alla puttanesca .wh',
-   'gonewild .re'
   ];
   setInterval(() => {
    let i = Math.floor(Math.random() * placeholderArr.length);
