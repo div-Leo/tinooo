@@ -24,4 +24,4 @@ app
   return await next();
  })
  .use(router.routes())
- .listen(3001);
+ .listen(process.env.PORT || 3001);
