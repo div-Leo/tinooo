@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cors = require('koa-cors');
 const bodyparser = require('koa-bodyparser');
 const router = require('./router.js');
@@ -5,9 +6,9 @@ const router = require('./router.js');
 const Koa = require('koa');
 const app = new Koa();
 
-const monk = require('monk');
 const nconf = require('./configuration.js');
-const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
+const monk = require('monk');
+const db = monk(process.env.MONGOLAB_URI || 'localhost/tinooo');
 const User = db.get('users');
 
 app
@@ -19,7 +20,8 @@ app
    return await next();
   ctx.token = authorization.split(' ')[1];
   ctx.user = await User.findOne({ accessToken: ctx.token });
+  console.log('USER ====== ',ctx.user);
   return await next();
  })
  .use(router.routes())
- .listen(3001);
+ .listen(process.env.PORT || 3001);

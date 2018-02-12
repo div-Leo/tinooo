@@ -1,6 +1,6 @@
 const monk = require('monk');
 const nconf = require('../configuration.js');
-const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
+const db = monk(process.env.MONGOLAB_URI || 'localhost/tinooo');
 // TODO: change in the real db
 
 const User = db.get('users');

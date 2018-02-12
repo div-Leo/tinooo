@@ -9,6 +9,8 @@ import logout from '../assets/img/logout.png';
 
 import { shortcutCode } from '../data/shortcutData';
 
+const urlHeroku = 'https://tinooo.herokuapp.com'
+
 class Profile extends Component {
  constructor(props) {
   super(props);
@@ -20,7 +22,7 @@ class Profile extends Component {
 
  // Facebook
  responseFb = response => {
-  fetch('http://localhost:3001/auth/facebook', {
+  fetch(`${urlHeroku}/auth/facebook`, {
    method: 'POST',
    body: JSON.stringify(response),
    headers: new Headers({
@@ -35,7 +37,7 @@ class Profile extends Component {
  };
 
  responseGoogle = response => {
-  fetch('http://localhost:3001/auth/google', {
+  fetch(`${urlHeroku}/auth/google`, {
    method: 'POST',
    body: JSON.stringify(response),
    headers: new Headers({
@@ -62,7 +64,7 @@ class Profile extends Component {
   localStorage.setItem('userSearches', []);
   if (localStorage.getItem('accessToken')) {
    await this.props.logged(true);
-   await fetch('http://localhost:3001/login', {
+   await fetch(`${urlHeroku}/login`, {
     headers: {
      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
     }

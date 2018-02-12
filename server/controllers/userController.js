@@ -2,13 +2,14 @@ const nconf = require('../configuration.js');
 const config = require('../config.js');
 const axios = require('axios');
 const monk = require('monk');
-const db = monk(nconf.get('MONGODB_URL') || 'localhost/polipro');
+const db = monk(process.env.MONGOLAB_URI || 'localhost/tinooo');
 var GoogleAuth = require('google-auth-library');
 
 const User = db.get('users');
 
 const userDB = async userData => {
  let user = await User.findOne({ email: userData.email });
+ console.log(user);
  if (!user) {
   try {
    user = await User.insert(userData);
