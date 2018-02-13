@@ -12,9 +12,11 @@
 
 ## Screenshots
 <div align="center">
+  
 ![](./tinooo.gif)
 
 ![](./tinooo_shortcut.gif)
+
 </div>
 
 ## Usage
