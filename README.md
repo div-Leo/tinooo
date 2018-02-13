@@ -12,6 +12,8 @@
 
 ## Screenshots
 
+![](./tinooo.gif)
+
 ## Usage
 
 * `git clone` or download the zip file.
