@@ -8,6 +8,7 @@
 
 # production
 /build
+./public/privacypolicy.htm
 
 # misc
 .DS_Store

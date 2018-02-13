@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Modal, { closeStyle } from 'simple-react-modal';
 import animations from '../animations';
 import './ModalAdd.css';
-
+import serverHost from '../serverHost';
 import { shortcut } from '../data/sc.min';
+
 const secretKey = 'ctrl';
+
 
 class ModalAdd extends Component {
  constructor(props) {
@@ -71,7 +73,7 @@ class ModalAdd extends Component {
 
  sendShortcutDB = async str => {
   this.props.close();
-  await fetch('http://localhost:3001/shortcuts', {
+  await fetch(`${serverHost}/shortcuts`, {
    method: 'POST',
    body: JSON.stringify({ shortcut: str }),
    headers: {

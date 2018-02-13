@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { searchEngineCode, shortcutCode } from '../data/shortcutData';
 import './SearchBar.css';
+import serverHost from '../serverHost'
+
 
 class SearchBar extends Component {
  constructor(props) {
@@ -17,7 +19,7 @@ class SearchBar extends Component {
    .join('+');
   window.open('http://' + link + fullTextSearch, '');
   if (localStorage.getItem('accessToken')) {
-   fetch(`http://localhost:3001/searches`, {
+   fetch(`${serverHost}/searches`, {
     method: 'POST',
     body: JSON.stringify({ search: text }),
     headers: {
@@ -39,14 +41,14 @@ class SearchBar extends Component {
 
  reset = () => {
    if (localStorage.getItem('accessToken')) {
-    fetch(`http://localhost:3001/searches`, {
+    fetch(`${serverHost}/searches`, {
      method: 'DELETE',
      headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`
      }
     });
-    fetch(`http://localhost:3001/shortcuts`, {
+    fetch(`${serverHost}/shortcuts`, {
      method: 'DELETE',
      headers: {
       'Content-Type': 'application/json',

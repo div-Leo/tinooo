@@ -96,7 +96,7 @@ componentWillReceiveProps(nextProps){
     <div
      className={
       this.props.shown
-       ? 'side_container'
+       ? this.state.showModal ? 'side_container side_container--modal' : 'side_container'
        : 'side_container side_container--close'
      }
     >

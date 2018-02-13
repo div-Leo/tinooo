@@ -9,7 +9,7 @@ import logout from '../assets/img/logout.png';
 
 import { shortcutCode } from '../data/shortcutData';
 
-const urlHeroku = 'https://tinooo.herokuapp.com'
+import serverHost from '../serverHost';
 
 class Profile extends Component {
  constructor(props) {
@@ -22,7 +22,7 @@ class Profile extends Component {
 
  // Facebook
  responseFb = response => {
-  fetch(`${urlHeroku}/auth/facebook`, {
+  fetch(`${serverHost}/auth/facebook`, {
    method: 'POST',
    body: JSON.stringify(response),
    headers: new Headers({
@@ -37,7 +37,7 @@ class Profile extends Component {
  };
 
  responseGoogle = response => {
-  fetch(`${urlHeroku}/auth/google`, {
+  fetch(`${serverHost}/auth/google`, {
    method: 'POST',
    body: JSON.stringify(response),
    headers: new Headers({
@@ -64,7 +64,7 @@ class Profile extends Component {
   localStorage.setItem('userSearches', []);
   if (localStorage.getItem('accessToken')) {
    await this.props.logged(true);
-   await fetch(`${urlHeroku}/login`, {
+   await fetch(`${serverHost}/login`, {
     headers: {
      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
     }
