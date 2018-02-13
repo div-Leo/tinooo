@@ -1,24 +1,27 @@
-# TINOOO
+# Tinooo
 
-An elegant and simple solution for browser navigating and workflow.
-
-## Learning Objectives
+> An elegant way to browse the web for users and improve workflow for developers.
 
 ## Implemented Features
 
-* Balances (currently Bitcoin, Litecoin & Dogecoin)
-* Transfer coin via QR code
-* Recent Transactions
-* Exchange Information for the provided currencies
-* Market Graph Information for popular currencies
-* Currency calculator
-* Latest Cryptocurrency News
+* Login with Google+ or Facebook.
+* Keyboard shortcuts to open commonly visited websites.
+* Type shortcodes to immediately open a new tab and search.
+* Custom shortcuts for the user to personalise their workflow further.
+* Available on both `tinooo.com` or as a Chrome Extension on the Chrome Store.
 
 ## Screenshots
+<div align="center">
+  
+![](./tinooo.gif)
+
+![](./tinooo_shortcut.gif)
+
+</div>
 
 ## Usage
 
-* `git clone https://github.com/rainierlouis/Blocklet.git` or download the zip file.
+* `git clone` or download the zip file.
 
 * `cd /client`.
 
@@ -26,18 +29,24 @@ An elegant and simple solution for browser navigating and workflow.
 
 * `npm start` to boot up the development server.
 
-* Scan the barcode with the Expo app on your phone or follow the terminal instructions to load up the emulator on your machine.
 
-## Technology Stack
+## Built with
 
-**Front:**
+* [React](https://reactjs.org/) - Front end library for building user interfaces
+* [Sass](https://sass-lang.com/) - Preprocessing CSS
+* [Greensocks](https://greensock.com/) - HTML animation tooling
+* [Node / Koa](http://koajs.com/) - Back end web framework
+* [MongoDB / Monk](https://github.com/Automattic/monk) - Database storage for Node
 
-* React
-* Sass
-* Greensocks
+## Contributing
 
-**Back:**
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-* Node
-* Koa
-* MongoDB / Monk
+## Authors
+
+* Leonardo Di Vittorio - [Leon31](https://github.com/Leon31)
+* Rainier Louis - [rainierlouis](https://github.com/rainierlouis)
+
+## License
+
+TBA
