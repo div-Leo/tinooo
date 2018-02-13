@@ -1,4 +1,4 @@
-# TINOOO
+# Tinooo
 
 > An elegant way to browse the web for users and improve workflow for developers.
 
@@ -21,6 +21,7 @@
 * `npm install` to begin dependencies installation.
 
 * `npm start` to boot up the development server.
+
 
 ## Built with
 
