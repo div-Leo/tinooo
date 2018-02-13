@@ -12,7 +12,7 @@
 
 ## Screenshots
 
-![](./tinooo.gif)![](./tinooo_shortcuts.gif)
+![](./tinooo.gif)![](./tinooo_shortcut.gif)
 
 ## Usage
 
