@@ -11,8 +11,11 @@
 * Available on both `tinooo.com` or as a Chrome Extension on the Chrome Store.
 
 ## Screenshots
+<div align="center">
+![](./tinooo.gif)
 
-![](./tinooo.gif)![](./tinooo_shortcut.gif)
+![](./tinooo_shortcut.gif)
+</div>
 
 ## Usage
 
