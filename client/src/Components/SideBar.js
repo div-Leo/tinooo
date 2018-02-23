@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Profile from './Profile';
 import './SideBar.css';
 
-import { searchEngineCode, shortcutCode } from '../data/shortcutData';
+import { searchEngineCode } from '../data/shortcutData';
 import animations from '../animations';
 import ModalAdd from './ModalAdd';
 import MediaQuery from 'react-responsive';

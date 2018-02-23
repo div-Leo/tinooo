@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import empty_profile from '../images/profile_icon.png';
 import GoogleLogin from 'react-google-login';
-import GoogleIcon from 'react-icons/lib/fa/google';
-import './Profile.css';
-
-import logout from '../assets/img/logout.png';
-
-import { shortcutCode } from '../data/shortcutData';
 
 import serverHost from '../serverHost';
+import { shortcutCode } from '../data/shortcutData';
+import './Profile.css';
+import empty_profile from '../images/profile_icon.png';
+// import GoogleIcon from 'react-icons/lib/fa/google';
+// import logout from '../assets/img/logout.png';
+
 
 class Profile extends Component {
  constructor(props) {
@@ -90,7 +89,7 @@ class Profile extends Component {
  renderProfile = () => {
   return this.props.userData ? (
    <div className="profile_container">
-    <img className="profile_img" src={this.props.userData.profile_picture} />
+    <img className="profile_img" src={this.props.userData.profile_picture} alt="profile Picture"/>
     <div className="profile_login profile_login--loggedIn">
      <div className="profile_name">{this.props.userData.name}</div>
      <div className="profile_email">{this.props.userData.email}</div>
@@ -102,7 +101,7 @@ class Profile extends Component {
    </div>
   ) : (
    <div className="profile_container">
-    <img className="profile_img" src={empty_profile} />
+    <img className="profile_img" src={empty_profile} alt="empty profile Picture" />
     <div className="profile_login">
      {/* <div className="profile_login_text">Login with:</div> */}
      <FacebookLogin

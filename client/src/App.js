@@ -72,8 +72,8 @@ class App extends Component {
    }
    if (
     (this.state.countHistory < historySearch.length && this.state.countHistory > 0) ||
-    (this.state.countHistory == 0 && x == 0) ||
-    (this.state.countHistory == historySearch.length && x == 1)
+    (this.state.countHistory === 0 && x === 0) ||
+    (this.state.countHistory === historySearch.length && x === 1)
    ) {
     if (x) {
      this.state.countHistory--;

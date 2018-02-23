@@ -74,8 +74,7 @@ class SearchBar extends Component {
 
    let translateText = t.trim().slice(t.trim().length - 6, t.trim().length);
 
-   console.log(translateText);
-   if (translateText.match(/\s[a-z][a-z]\-[a-z][a-z]/)) {
+   if (translateText.match(/\s[a-z][a-z]-[a-z][a-z]/)) {
     const item = translateText.trim().split('-');
     t = t.slice(0, t.trim().length - 6);
     this.actionSearch(t, `translate.google.com/#${item[0]}/${item[1]}/`, 'Translate');
@@ -91,8 +90,17 @@ class SearchBar extends Component {
     }
    });
 
-   if (x.which == 13) {
-    this.actionSearch(t, 'google.it/?gws_rd=ssl#q=', 'Google');
+   if (x.which === 13) {
+    if (t.match(/http/) ) {
+      this.actionSearch('',  t.slice(t.search(/\//)+2), 'Link');
+    } else if (t.match(/www/)) {
+      this.actionSearch('', t, 'Link');
+    } else if (t.match(/\.com/)) {
+      this.actionSearch('', t, 'Link');
+    }
+    else {
+      this.actionSearch(t, 'google.it/?gws_rd=ssl#q=', 'Google');
+    }
     input.value = '';
    }
   }
@@ -104,15 +112,16 @@ class SearchBar extends Component {
 
  changePlaceholder = () => {
   let placeholderArr = [
-   'Aliens riding cows .un',
-   'Camera .aa',
-   "I'm calling a function but she said she's busy .st",
-   'How to program an app .gt',
-   'Moonwalk tutorial .yy',
-   "Array.map .md",
-   'Springfield .mm',
-   'Heisemberg .ww',
-   'How to make pasta alla puttanesca .wh',
+    'Hi! My name is Tinooo en-es',
+    'Aliens riding cows .un',
+    'Nikon d3200 .aa',
+    "I'm calling a function but she said she's busy .st",
+    'How to program an app .gt',
+    'Moonwalk tutorial .yy',
+    "Array.prototype.map .md",
+    'Springfield .mm',
+    'Heisemberg .ww',
+    'How to make pasta alla puttanesca .wh',
   ];
   setInterval(() => {
    let i = Math.floor(Math.random() * placeholderArr.length);
