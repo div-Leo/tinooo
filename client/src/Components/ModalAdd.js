@@ -105,12 +105,12 @@ class ModalAdd extends Component {
   return (
    <div className="modal_window">
     <Modal
-     id="full_modal"
-     closeOnOuterClick={true}
-     onClose={() => this.closeModal(this.props.close)}
-     style={{}}
-     containerStyle={{ width: '40vw', padding: '30px 40px' }}
-     show={this.props.show}
+      id="full_modal"
+      closeOnOuterClick={true}
+      onClose={() => this.closeModal(this.props.close)}
+      style={{}}
+      containerStyle={{ width: '40vw', padding: '30px 40px' }}
+      show={this.props.show}
     >
      <div id="modal" onKeyUp={e => this.keypressData(e)} className="modal_item">
       <span className="modal_title">New Shortcut:</span>

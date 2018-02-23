@@ -3,14 +3,14 @@
 .searchbar
   position: absolute
   transform: translate(-50%, -50%)
-  top: 50%
+  top: 57%
   left: 50%
   border: none
   outline-offset: none
   outline: none
   outline-color: none
   box-shadow: 0 1px 10px 3px rgba(70,70,70,0.1)
-  width: 30vw
+  width: 500px
   padding: 16px 24px
   font-size: 1.4em
   font-weight: 300
@@ -18,3 +18,8 @@
 
 ::-webkit-input-placeholder
   color: $texts
+
+@media only screen and (max-width: 768px)
+  .searchbar
+    width: 280px
+    margin-left: 10px

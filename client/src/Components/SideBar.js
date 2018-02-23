@@ -5,6 +5,8 @@ import './SideBar.css';
 import { searchEngineCode, shortcutCode } from '../data/shortcutData';
 import animations from '../animations';
 import ModalAdd from './ModalAdd';
+import MediaQuery from 'react-responsive';
+
 
 class SideBar extends Component {
  constructor(props) {
@@ -28,7 +30,7 @@ class SideBar extends Component {
 
  openLi = async (e, id, list) => {
   let num;
-  list ? (num = this.heightOfLi(id, list)) : (num = 280);
+  list ? (num = this.heightOfLi(id, list)) : (num = 310);
   const target = document.querySelector(`#${id}`);
   if (this.state[id]) {
    animations.dropUp(target);
@@ -113,13 +115,11 @@ componentWillReceiveProps(nextProps){
       because you do not need them. A wonderful and smart project made for
       developers.
      </p>
+     <MediaQuery query="(min-width: 800px)">
      <div id="shortcuts" className="side_li">
       <div className="side_li_main">
        <h1 className="side_li_title">Shortcuts:</h1>
-       <div
-        className="side_li_arrow"
-        onClick={e => this.openLi(e, 'shortcuts', this.getShortcuts())}
-       />
+       <div className="side_li_arrow" onClick={e => this.openLi(e, 'shortcuts', this.getShortcuts())}/>
       </div>
       <div>
        <p className="side_li_text">
@@ -142,6 +142,7 @@ componentWillReceiveProps(nextProps){
        ) : null}
       </div>
      </div>
+     </MediaQuery>
 
      <div id="codes" className="side_li">
       <div className="side_li_main">
@@ -183,6 +184,7 @@ componentWillReceiveProps(nextProps){
         <h2>Reset</h2>
         <p>
          Type in the search bar 'reset tinooo' to clear your history entirely.
+         Warning: you'll lose all your previuos data.
         </p>
        </div>
       </div>
@@ -196,8 +198,8 @@ componentWillReceiveProps(nextProps){
       <div>
        <div className="side_li_about_item">
         <h2>Contact us</h2>
-        <p>
-         For any suggestions, feedback or criticism, please contact us at:{' '}
+        <p className="side_p_about_contact">
+         For any suggestions contact us at:{' '}
          <span>leodivittorio@gmail.com</span> or{' '}
          <span>rainierlouis@gmail.com</span>
         </p>
@@ -206,16 +208,17 @@ componentWillReceiveProps(nextProps){
         <h2>Open source</h2>
         <p>
          Feel free to check out our repository on{' '}
-         <a href="https://github.com/Leon31/tinooo">Github</a>
+         <a href="https://github.com/Leon31/tinooo">Github</a>{' '}
+         to collaborate.
         </p>
        </div>
       </div>
      </div>
-     <ModalAdd
-      show={this.state.showModal}
-      open={this.show.bind(this)}
-      close={this.close.bind(this)}
-     />
+       <ModalAdd
+         show={this.state.showModal}
+         open={this.show.bind(this)}
+         close={this.close.bind(this)}
+       />
     </div>
    </div>
   );

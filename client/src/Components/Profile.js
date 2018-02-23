@@ -104,7 +104,7 @@ class Profile extends Component {
    <div className="profile_container">
     <img className="profile_img" src={empty_profile} />
     <div className="profile_login">
-     <div className="profile_login_text">Login with:</div>
+     {/* <div className="profile_login_text">Login with:</div> */}
      <FacebookLogin
       cssClass="profile_login_button profile_login_button--facebook"
       appId="180949189168618"
@@ -114,7 +114,7 @@ class Profile extends Component {
       textButton=""
       icon="fa-facebook"
      />
-     <div className="profile_login_text">or</div>
+     {/* <div className="profile_login_text">or</div> */}
      <GoogleLogin
       clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
       buttonText="G+"

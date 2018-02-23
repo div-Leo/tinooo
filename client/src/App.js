@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-
 import { shortcutCode } from './data/shortcutData';
-
 import './App.css';
-
 import { shortcut } from './data/sc.min';
-
 import SearchBar from './Components/SearchBar';
 import SideBar from './Components/SideBar';
 
@@ -34,9 +30,6 @@ class App extends Component {
  }
 
  checkLocalStorage = () => {
-  // localStorage.getItem('userShortcuts')
-  //  ? false
-  //  :
    localStorage.setItem('userShortcuts', shortcutCode);
  };
 
@@ -96,7 +89,6 @@ class App extends Component {
  };
 
  grabEvent = e => {
-   console.log(e.which);
   switch (e.which) {
    case 18:
     this.openHelp();

@@ -11,8 +11,10 @@
   "react-facebook-login": "^3.7.2",
   "react-google-login": "^3.0.4",
   "react-icons": "^2.2.7",
+  "react-responsive": "^4.0.4",
   "react-scripts": "1.1.0",
-  "semantic-ui-react": "^0.77.2"
+  "semantic-ui-react": "^0.77.2",
+  "simple-react-modal": "^0.5.1"
  },
  "scripts": {
   "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
