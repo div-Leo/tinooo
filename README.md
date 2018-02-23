@@ -40,7 +40,7 @@
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. Note: All credential are private, so if you want to work with this project you have to change the database link and create an config file with the validateUrl from facebook and google.
 
 ## Authors
 
