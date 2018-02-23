@@ -17,10 +17,7 @@ export const searchEngineCode = new Array(
  '.me medium.com/search?q= Medium',
  '.re www.reddit.com/search?q= Reddit',
  '.wh www.wikihow.com/wikiHowTo?search= WikiHow',
- 'it-en translate.google.com/#it/en/ IT->EN',
- 'en-it translate.google.com/#en/it/ EN->IT',
- 'en-es translate.google.com/#en/es EN->ES',
- 'es-en translate.google.com/#es/en ES->EN',
+ 'from-to translate.google.com/#it/en/ Translate',
 );
 
 export const shortcutCode = new Array(

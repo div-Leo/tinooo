@@ -74,14 +74,16 @@ class SearchBar extends Component {
 
    let translateText = t.trim().slice(t.trim().length - 6, t.trim().length);
 
+   console.log(translateText);
+   if (translateText.match(/\s[a-z][a-z]\-[a-z][a-z]/)) {
+    const item = translateText.trim().split('-');
+    t = t.slice(0, t.trim().length - 6);
+    this.actionSearch(t, `translate.google.com/#${item[0]}/${item[1]}/`, 'Translate');
+    input.value = '';
+   }
+
    searchEngineCode.forEach((el, i) => {
     const item = el.split(' ');
-    if (translateText === ' ' + item[0]) {
-     t = t.slice(0, t.trim().length - 6);
-     this.actionSearch(t, item[1], item[2]);
-     input.value = '';
-    }
-
     if (searchText === ' ' + item[0]) {
      t = t.slice(0, t.trim().length - 4);
      this.actionSearch(t, item[1], item[2]);
