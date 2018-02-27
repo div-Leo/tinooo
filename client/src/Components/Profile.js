@@ -15,6 +15,7 @@ class Profile extends Component {
   super(props);
   this.state = {};
   if (localStorage.getItem('accessToken')) {
+    console.log('AC', localStorage.getItem('accessToken'));
    this.login();
   }
  }
@@ -68,13 +69,15 @@ class Profile extends Component {
      Authorization: 'Bearer ' + localStorage.getItem('accessToken')
     }
    })
-    .then(res => res.json())
+    .then(res => {if (res.status === 200) return res.json()})
     .then(data => {
-     this.props.setUserData(data);
-     if (data.shortcutsList.length > 0)
-      this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
-     if (data.searchesList.length > 0)
-      this.updateLocalStorage(data.searchesList, 'userSearches');
+      if (data) {
+        this.props.setUserData(data);
+        if (data.shortcutsList.length > 0)
+          this.updateLocalStorage(data.shortcutsList, 'userShortcuts');
+        if (data.searchesList.length > 0)
+          this.updateLocalStorage(data.searchesList, 'userSearches');
+      }
     });
   }
  };
@@ -113,15 +116,14 @@ class Profile extends Component {
       textButton=""
       icon="fa-facebook"
      />
-     {/* <div className="profile_login_text">or</div> */}
-     <GoogleLogin
+     {/* <GoogleLogin
       clientId="1089959983020-u8m1st89h7r4psfk2n4tdeq8ugkb7g62.apps.googleusercontent.com"
       buttonText="G+"
       className="profile_login_button profile_login_button--google"
       scope="profile email"
       onSuccess={this.responseGoogle}
       onFailure={this.responseGoogle}
-     />
+     /> */}
     </div>
    </div>
   );
