@@ -26,30 +26,34 @@ class ModalAdd extends Component {
      [e.target.id]: e.target.value
    });
 
-   if (
-     keyEnter === 13 &&
-   this.state.name !== '' &&
-   this.state.url_link !== '' &&
-   this.state.shortcut !== ''
-   ) {
-     let shortcutData = localStorage.getItem('userShortcuts').split(',');
-     let taken = shortcutData.some(el => {
-       let splitItem = el.split(' ');
-       return splitItem[0].toLowerCase() === this.state.shortcut.toLowerCase();
-     });
-     !taken
-       ? this.sendShortcutDB(
-         `${this.state.shortcut} ${this.state.url_link} ${this.state.name}`
-       )
-       : this.denyEntry();
+   if (keyEnter === 13){
+     if (
+       this.state.name !== '' &&
+       this.state.url_link !== '' &&
+       this.state.shortcut !== ''
+     ) {
+       let shortcutData = localStorage.getItem('userShortcuts').split(',');
+       let taken = shortcutData.some(el => {
+         let splitItem = el.split(' ');
+         this.setState({
+           deny: ''
+         });
+         return splitItem[0].toLowerCase() === this.state.shortcut.toLowerCase();
+       });
+       !taken
+         ? this.sendShortcutDB(
+           `${this.state.shortcut.toUpperCase()} ${this.state.url_link} ${this.state.name}`
+         )
+         : this.denyEntry('Shortcut taken - Please try another');
+     } else this.denyEntry('Fill all the fields');
    }
  };
 
- denyEntry = () => {
+ denyEntry = (denyMessage) => {
    const element = document.querySelector('#modal');
    animations.shakeModal(element);
    this.setState({
-     deny: 'Shortcut taken - Please try another'
+     deny: denyMessage
    });
  };
 
@@ -98,6 +102,7 @@ class ModalAdd extends Component {
      shortcut: '',
      url_link: ''
    });
+   console.log(f);
    f();
  };
 
@@ -120,7 +125,7 @@ class ModalAdd extends Component {
            </span>
            <div className="modal_subtitle_item">
              <h2 className="modal_subtitle_text">Name:</h2>
-             <input id="name" className="modal_input" />
+             <input autoFocus id="name" className="modal_input" />
            </div>
            <div className="modal_subtitle_item">
              <h2 className="modal_subtitle_text">URL:</h2>

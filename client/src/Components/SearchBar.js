@@ -137,6 +137,7 @@ class SearchBar extends Component {
    return (
      <div>
        <input
+         autoFocus
          onKeyUp={e => this.searchWithBrain(e)}
          id="search-bar"
          className="searchbar"

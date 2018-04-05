@@ -81,7 +81,7 @@ class App extends Component {
        } else {
          this.state.countHistory++;
          historySearch[this.state.countHistory]
-           ? input.value = historySearch[this.state.countHistory] + ' .aa'
+           ? input.value = historySearch[this.state.countHistory]
            : input.value = '';
        }
      }
@@ -105,9 +105,10 @@ grabEvent = e => {
 };
 
  changeFocusMode = automatic => {
+   console.log('FOCUS',automatic);
    this.setState({
      autofocus: automatic
-   });
+   }, () => this.inputFocus());
  };
 
  // RENDER =========================
