@@ -128,9 +128,9 @@ grabEvent = e => {
          focusSearch={this.inputFocus}
        />
        <div className="logo">
-         <div className="logo_dot" id="dot_1" />
-         <div className="logo_dot" id="dot_2" />
-         <div className="logo_dot" id="dot_3" />
+         <div className="logo_dot_new" id="dot_1" />
+         <div className="logo_dot_new" id="dot_2" />
+         <div className="logo_dot_new" id="dot_3" />
        </div>
        <SearchBar />
      </div>
